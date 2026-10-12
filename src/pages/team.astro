@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import PersonCard from "../components/PersonCard.astro";
+import { team } from "../data/team";
+import { u } from "../lib/url";
+
+const leaders = team.filter((p) => p.leader);
+const crew = team.filter((p) => !p.leader);
+---
+
+<Base
+  title="Team | GridFlow"
+  description="Meet the GridFlow team: scientists, engineers and utility veterans building vanadium flow batteries in Albuquerque, New Mexico."
+  darkHeader
+>
+  <PageHeader
+    title="The people behind GridFlow"
+    lede="Scientists, engineers and utility veterans, building long-duration storage in Albuquerque."
+  />
+
+  <section class="group">
+    <div class="wrap">
+      <h2>Leadership</h2>
+      <ul class="people">
+        {leaders.map((p) => <PersonCard person={p} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="group alt">
+    <div class="wrap">
+      <h2>Lab and engineering</h2>
+      <ul class="people">
+        {crew.map((p) => <PersonCard person={p} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="join">
+    <div class="wrap">
+      <h2>Want to join us?</h2>
+      <p class="lede">We're growing in New Mexico. See what's open, or tell us how you'd like to help.</p>
+      <a class="btn btn-blue" href={u("/careers/")}>See careers</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .group {
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .group.alt {
+    background: var(--white);
+  }
+  .group h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .people {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px 32px;
+  }
+  .join {
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .join .lede {
+    margin-top: 12px;
+  }
+  .join .btn {
+    margin-top: 24px;
+  }
+  @media (max-width: 980px) {
+    .people {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 520px) {
+    .people {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

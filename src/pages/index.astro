@@ -2,6 +2,8 @@
 import Base from "../layouts/Base.astro";
 import { u } from "../lib/url";
 import { press } from "../data/press";
+import { team } from "../data/team";
+import PersonCard from "../components/PersonCard.astro";
 
 const specs = [
   {
@@ -52,36 +54,7 @@ const roadmap = [
   },
 ];
 
-const team = [
-  {
-    name: "Fred Siegele",
-    role: "CEO",
-    photo: "team/fred-siegele.webp",
-    linkedin: "https://www.linkedin.com/in/fred-siegele-4919a44/",
-    bio: "Three decades in specialty chemicals and equipment. Took Advanced Delivery & Chemical Systems from $80K in funding to a $230M exit.",
-  },
-  {
-    name: "Dr. Charles Call",
-    role: "Founder & CTO",
-    photo: "team/charles-call.webp",
-    linkedin: "https://www.linkedin.com/in/charles-call-76933/",
-    bio: "Energy systems engineer with 25 years leading deep-tech startups, three exits and more than 40 U.S. patents. PhD, UC Davis.",
-  },
-  {
-    name: "Dr. Sean Byrne",
-    role: "Chief Scientist",
-    photo: "team/sean-byrne.webp",
-    linkedin: "https://www.linkedin.com/in/sean-byrne-515008251/",
-    bio: "Electrochemist with ten years of research in batteries, electrodeposition and electrocatalysis. PhD, Caltech.",
-  },
-  {
-    name: "Blake Ridgeway",
-    role: "Board Member",
-    photo: "team/blake-ridgeway.webp",
-    linkedin: "https://www.linkedin.com/in/blake-ridgeway-994a279/",
-    bio: "Former senior vice president at Public Service Company of New Mexico, with deep utility-sector relationships.",
-  },
-];
+const leaders = team.filter((p) => p.leader);
 ---
 
 <Base
@@ -315,33 +288,9 @@ const team = [
     <div class="wrap">
       <h2 id="team-h">Scientists, builders and utility veterans</h2>
       <ul class="people">
-          {
-            team.map((p) => (
-              <li>
-                <div class="person-head">
-                  {p.photo ? (
-                    <img class="avatar" src={u(p.photo)} alt="" width="96" height="96" loading="lazy" />
-                  ) : (
-                    <span class="avatar initials" aria-hidden="true">
-                      {p.name.replace("Dr. ", "").split(" ").map((w) => w[0]).join("")}
-                    </span>
-                  )}
-                  <div>
-                    <h3>{p.name}</h3>
-                    <p class="role">{p.role}</p>
-                  </div>
-                </div>
-                <p class="bio">{p.bio}</p>
-                <a class="linkedin" href={p.linkedin} rel="noopener" aria-label={`${p.name} on LinkedIn`}>
-                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                    <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
-                  </svg>
-                  LinkedIn
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+        {leaders.map((p) => <PersonCard person={p} />)}
+      </ul>
+      <a class="team-more" href={u("/team/")}>Meet the whole team</a>
     </div>
   </section>
 
@@ -768,53 +717,10 @@ const team = [
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 36px 32px;
   }
-  .people li {
-    border-top: 1px solid var(--rule);
-    padding-top: 18px;
-  }
-  .role {
-    margin-top: 2px;
-    color: var(--blue);
+  .team-more {
+    display: inline-block;
+    margin-top: 36px;
     font-weight: 600;
-  }
-  .person-head {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  .avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex: none;
-    background: var(--deep);
-  }
-  .initials {
-    display: grid;
-    place-items: center;
-    color: var(--white);
-    font-weight: 700;
-    font-stretch: 112%;
-    font-size: 1.375rem;
-  }
-  .bio {
-    margin-top: 14px;
-    color: var(--muted);
-    font-size: 0.9375rem;
-  }
-  .linkedin {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .linkedin:hover {
-    text-decoration: underline;
   }
 
   /* Press */

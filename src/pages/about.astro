@@ -1,0 +1,211 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { u } from "../lib/url";
+
+const milestones = [
+  { when: "Late summer 2024", what: "Dr. Chuck Call and Dr. Sean Byrne found GridFlow in Albuquerque to develop a lithium-sulfur hybrid flow battery." },
+  { when: "December 2025", what: "GridFlow moves to vanadium redox flow batteries." },
+  { when: "April 2026", what: "Fred Siegele joins as CEO. Dr. Call becomes CTO." },
+  { when: "May 2026", what: "GridFlow receives the New Mexico Advanced Energy Award." },
+  { when: "2026", what: "EMNRD and Kit Carson Electric Cooperative award GridFlow its first pilot contract." },
+  { when: "Late 2026", what: "First 80 kWh vanadium flow battery installation." },
+];
+---
+
+<Base
+  title="About | GridFlow"
+  description="GridFlow is an Albuquerque company bringing vanadium flow batteries to the U.S. grid. Founded in 2024, built in New Mexico."
+  darkHeader
+>
+  <PageHeader
+    title="Built in New Mexico, for the grid we have today."
+    lede="GridFlow brings long-duration vanadium flow batteries to utilities, co-ops and businesses. Here's how we got here and what we stand for."
+  />
+
+  <section class="story">
+    <div class="wrap story-grid">
+      <article class="prose">
+        <h2>How we started</h2>
+        <p>
+          GridFlow began in Albuquerque in late summer 2024. Our founders, Dr. Chuck Call, a systems engineer, and Dr.
+          Sean Byrne, an electrochemist, set out to build better long-duration energy storage. Our first project was a
+          lithium-sulfur hybrid flow battery.
+        </p>
+
+        <h2>Why we changed chemistry</h2>
+        <p>
+          The deeper we got into the research, the clearer it became that a different chemistry would serve the grid
+          better. Vanadium redox flow batteries are already proven at commercial scale. They're water-based, so they
+          don't burn, and they cycle for decades without losing capacity.
+        </p>
+        <p>
+          That kind of reliability is what power resilience actually takes, and it's the standard we hold ourselves to.
+          So in December 2025 we made the switch.
+        </p>
+
+        <h2>New Mexico is home</h2>
+        <p>
+          We were founded here, and we're building here. When we hire, buy, pick vendors or plan manufacturing, we look
+          to New Mexico first. Supporting our neighbors is part of the job: every project should leave something
+          behind in the community, from local jobs and skills to a supply chain that stays.
+        </p>
+
+        <h2>Power that exists today</h2>
+        <p>
+          Energy resilience comes from renewables paired with long-duration storage. Solar and wind make the power, and
+          flow batteries hold it for the evening peak and the hours after dark.
+        </p>
+        <p>
+          None of it depends on fusion or a quantum breakthrough that's always a decade away. The technology works
+          now, and we're putting it to work.
+        </p>
+      </article>
+
+      <aside class="timeline" aria-labelledby="timeline-h">
+        <h2 id="timeline-h">Milestones</h2>
+        <ol>
+          {
+            milestones.map((m) => (
+              <li>
+                <span class="when">{m.when}</span>
+                <span class="what">{m.what}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="next">
+    <div class="wrap next-grid">
+      <a href={u("/team/")}>
+        <span class="next-title">Meet the team</span>
+        <span class="next-text">The scientists, engineers and utility veterans behind GridFlow.</span>
+      </a>
+      <a href={u("/careers/")}>
+        <span class="next-title">Work with us</span>
+        <span class="next-text">See open roles, or tell us how you'd like to help.</span>
+      </a>
+      <a href={u("/contact-us/")}>
+        <span class="next-title">Talk to us</span>
+        <span class="next-text">Projects, partnerships and investment.</span>
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .story {
+    padding-block: var(--section);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(40px, 7vw, 112px);
+    align-items: start;
+  }
+  .prose h2 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin-top: 56px;
+  }
+  .prose h2:first-child {
+    margin-top: 0;
+  }
+  .prose p {
+    margin-top: 16px;
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+  .timeline {
+    position: sticky;
+    top: 32px;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .timeline h2 {
+    font-size: 1.25rem;
+  }
+  .timeline ol {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+  }
+  .timeline li {
+    position: relative;
+    padding: 0 0 22px 24px;
+    border-left: 2px solid var(--rule);
+    margin-left: 6px;
+  }
+  .timeline li:last-child {
+    padding-bottom: 0;
+    border-left-color: transparent;
+  }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .timeline li:last-child::before {
+    background: var(--v5);
+  }
+  .when {
+    display: block;
+    font-weight: 650;
+    font-size: 0.9375rem;
+  }
+  .what {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .next {
+    background: var(--white);
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .next-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .next-grid a {
+    display: block;
+    padding: 24px 0;
+    border-top: 2px solid var(--ink);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .next-grid a:hover .next-title {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .next-title {
+    display: block;
+    font-size: 1.375rem;
+    font-weight: 700;
+    font-stretch: 110%;
+  }
+  .next-text {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+  }
+  @media (max-width: 860px) {
+    .story-grid,
+    .next-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .timeline {
+      position: static;
+    }
+  }
+</style>
