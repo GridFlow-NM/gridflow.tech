@@ -314,14 +314,13 @@ const team = [
   <section id="team" class="team" aria-labelledby="team-h">
     <div class="wrap">
       <h2 id="team-h">Scientists, builders and utility veterans</h2>
-      <div class="team-grid">
-        <ul class="people">
+      <ul class="people">
           {
             team.map((p) => (
               <li>
                 <div class="person-head">
                   {p.photo ? (
-                    <img class="avatar" src={u(p.photo)} alt="" width="72" height="72" loading="lazy" />
+                    <img class="avatar" src={u(p.photo)} alt="" width="96" height="96" loading="lazy" />
                   ) : (
                     <span class="avatar initials" aria-hidden="true">
                       {p.name.replace("Dr. ", "").split(" ").map((w) => w[0]).join("")}
@@ -343,17 +342,6 @@ const team = [
             ))
           }
         </ul>
-        <figure class="lab">
-          <img
-            src={u("media/lab-team.webp")}
-            alt="Rudy Parra and Dr. Sean Byrne in lab coats and safety glasses reviewing results in the GridFlow lab."
-            width="1800"
-            height="1202"
-            loading="lazy"
-          />
-          <figcaption>Pictured from left to right: Rudy Parra, Lab Technician, and Dr. Sean Byrne, Chief Scientist.</figcaption>
-        </figure>
-      </div>
     </div>
   </section>
 
@@ -772,19 +760,12 @@ const team = [
   .team {
     padding-block: var(--section);
   }
-  .team-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: clamp(32px, 5vw, 72px);
-    margin-top: 48px;
-    align-items: start;
-  }
   .people {
     list-style: none;
-    margin: 0;
+    margin: 48px 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 36px 32px;
   }
   .people li {
@@ -798,12 +779,13 @@ const team = [
   }
   .person-head {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 16px;
   }
   .avatar {
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     object-fit: cover;
     flex: none;
@@ -833,21 +815,6 @@ const team = [
   }
   .linkedin:hover {
     text-decoration: underline;
-  }
-  .lab {
-    margin: 0;
-  }
-  .lab img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    object-position: 58% 50%;
-    border-radius: 20px;
-  }
-  .lab figcaption {
-    margin-top: 10px;
-    font-size: 0.875rem;
-    color: var(--muted);
   }
 
   /* Press */
@@ -922,8 +889,7 @@ const team = [
   /* Responsive */
   @media (max-width: 980px) {
     .how-grid,
-    .pilot-grid,
-    .team-grid {
+    .pilot-grid {
       grid-template-columns: minmax(0, 1fr);
     }
     .specs,
@@ -937,8 +903,8 @@ const team = [
     .spec:nth-child(n + 3) {
       padding-top: 32px;
     }
-    .lab img {
-      aspect-ratio: 3 / 2;
+    .people {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (max-width: 700px) {
