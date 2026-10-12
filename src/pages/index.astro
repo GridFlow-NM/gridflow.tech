@@ -83,40 +83,48 @@ const team = [
 >
   <!-- Hero -->
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1>Grid storage that lasts decades, without the fire risk.</h1>
-        <p class="hero-lede">
-          GridFlow brings containerized vanadium flow batteries to American utilities, co-ops and businesses,
-          starting here in New Mexico.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href={u("/contact-us/")}>Talk to our team</a>
-          <a class="btn btn-quiet" href="#how">How it works</a>
-        </div>
-      </div>
-      <figure class="hero-media">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster={u("media/flow-battery-poster.webp")}
-          aria-describedby="anim-caption"
-          width="1280"
-          height="800"
-          data-motion
-        >
-          <source src={u("media/flow-battery.mp4")} type="video/mp4" />
-        </video>
-        <figcaption id="anim-caption">
-          A flow battery through one cycle: solar charges it, then it powers the grid. The electrolyte changes color
-          as it stores energy.
-        </figcaption>
-        <button class="motion-toggle" type="button" aria-pressed="false" hidden>Pause animation</button>
-      </figure>
+    <div class="hero-bg" aria-hidden="true">
+      <video
+        class="hero-intro"
+        muted
+        playsinline
+        preload="auto"
+        poster={u("media/hero-loop-poster.webp")}
+        width="1440"
+        height="810"
+        data-intro
+      >
+        <source src={u("media/hero-intro.mp4")} type="video/mp4" />
+      </video>
+      <video
+        class="hero-loop"
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster={u("media/hero-loop-poster.webp")}
+        width="1440"
+        height="810"
+        data-motion
+        data-group="ambient"
+      >
+        <source src={u("media/hero-loop.mp4")} type="video/mp4" />
+      </video>
     </div>
+    <div class="wrap hero-copy">
+      <h1>Grid storage that lasts decades, without the fire risk.</h1>
+      <p class="hero-lede">
+        GridFlow brings containerized vanadium flow batteries to American utilities, co-ops and businesses, starting
+        here in New Mexico.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={u("/contact-us/")}>Talk to our team</a>
+        <a class="btn btn-quiet" href="#how">How it works</a>
+      </div>
+    </div>
+    <button class="motion-toggle hero-toggle" type="button" aria-pressed="false" data-toggle="ambient" hidden>
+      Pause background
+    </button>
   </section>
 
   <!-- Container -->
@@ -166,12 +174,34 @@ const team = [
           <p>Every charge cycle costs a little capacity, so systems hold less energy each year.</p>
         </div>
       </div>
-      <div class="nm-callout">
-        <img src={u("media/nm-map.webp")} alt="" width="1024" height="559" loading="lazy" />
-        <p>
-          New Mexico plans to reach 80% renewable power by 2040, and by our estimate its grid is already about
-          <strong>3,000 MWh</strong> short of the storage its existing solar needs.
-        </p>
+      <div class="day">
+        <figure class="day-media">
+          <video
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster={u("media/day-cycle-poster.webp")}
+            width="1200"
+            height="720"
+            aria-describedby="day-caption"
+            data-motion
+            data-group="day"
+          >
+            <source src={u("media/day-cycle.mp4")} type="video/mp4" />
+          </video>
+        </figure>
+        <div class="day-copy" id="day-caption">
+          <p>
+            After sunset, a 4-hour lithium-ion system runs dry before midnight. A vanadium flow battery sized for 12
+            hours carries the evening peak through to morning.
+          </p>
+          <p class="day-nm">
+            New Mexico plans to reach 80% renewable power by 2040, and by our estimate its grid is already about
+            <strong>3,000 MWh</strong> short of the storage its existing solar needs.
+          </p>
+          <button class="motion-toggle" type="button" aria-pressed="false" data-toggle="day" hidden>Pause animation</button>
+        </div>
       </div>
     </div>
   </section>
@@ -205,6 +235,30 @@ const team = [
         }
       </dl>
     </div>
+
+    <figure class="wrap how-media">
+      <video
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster={u("media/flow-battery-poster.webp")}
+        width="1200"
+        height="750"
+        aria-describedby="flow-caption"
+        data-motion
+        data-group="flow"
+      >
+        <source src={u("media/flow-battery.mp4")} type="video/mp4" />
+      </video>
+      <figcaption>
+        <span id="flow-caption">
+          One full cycle: solar charges the battery, then it powers the grid. Pumps circulate both electrolytes through
+          the cell stack, and their color tracks how much energy is stored.
+        </span>
+        <button class="motion-toggle" type="button" aria-pressed="false" data-toggle="flow" hidden>Pause animation</button>
+      </figcaption>
+    </figure>
 
     <div class="wrap">
       <dl class="specs">
@@ -251,6 +305,19 @@ const team = [
 
   <!-- Roadmap -->
   <section class="roadmap" aria-labelledby="roadmap-h">
+    <video
+      class="section-bg"
+      muted
+      loop
+      playsinline
+      preload="none"
+      poster={u("media/hero-loop-poster.webp")}
+      aria-hidden="true"
+      data-motion
+      data-group="ambient"
+    >
+      <source src={u("media/hero-loop.mp4")} type="video/mp4" />
+    </video>
     <div class="wrap">
       <h2 id="roadmap-h">Built in New Mexico, step by step</h2>
       <ol class="steps">
@@ -336,37 +403,113 @@ const team = [
 </Base>
 
 <script>
-  // Respect reduced-motion and let anyone pause the looping animation.
-  const video = document.querySelector<HTMLVideoElement>("video[data-motion]");
-  const toggle = document.querySelector<HTMLButtonElement>(".motion-toggle");
-  if (video && toggle) {
-    toggle.hidden = false;
-    const set = (paused: boolean) => {
-      if (paused) video.pause();
-      else video.play().catch(() => {});
-      toggle.setAttribute("aria-pressed", String(paused));
-      toggle.textContent = paused ? "Play animation" : "Pause animation";
-    };
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) set(true);
-    toggle.addEventListener("click", () => set(!video.paused));
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const videos = [...document.querySelectorAll<HTMLVideoElement>("video[data-motion]")];
+  const paused = new Set<string>();
+  const visible = new Set<HTMLVideoElement>();
+
+  const sync = (v: HTMLVideoElement) => {
+    const off = reduce || paused.has(v.dataset.group ?? "") || !visible.has(v);
+    if (off) v.pause();
+    else {
+      if (v.preload === "none") v.preload = "auto";
+      v.play().catch(() => {});
+    }
+  };
+
+  // Only play animations while they're on screen.
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting) visible.add(v);
+        else visible.delete(v);
+        sync(v);
+      }),
+    { threshold: 0.15 },
+  );
+
+  // Hero: play the welcome intro once, then hand off to the seamless loop.
+  const intro = document.querySelector<HTMLVideoElement>("video[data-intro]");
+  const heroLoop = document.querySelector<HTMLVideoElement>(".hero-loop");
+  if (intro && heroLoop) {
+    if (reduce) {
+      intro.hidden = true;
+      videos.forEach((v) => io.observe(v));
+    } else {
+      heroLoop.preload = "auto";
+      intro.addEventListener("ended", () => {
+        intro.hidden = true;
+        videos.forEach((v) => io.observe(v));
+      });
+      intro.play().catch(() => {
+        intro.hidden = true;
+        videos.forEach((v) => io.observe(v));
+      });
+    }
+  } else {
+    videos.forEach((v) => io.observe(v));
   }
+
+  // Pause buttons
+  document.querySelectorAll<HTMLButtonElement>("button[data-toggle]").forEach((btn) => {
+    if (reduce) return;
+    btn.hidden = false;
+    const group = btn.dataset.toggle!;
+    const label = btn.textContent!.trim().replace(/^Pause /, "");
+    btn.addEventListener("click", () => {
+      const nowPaused = !paused.has(group);
+      if (nowPaused) paused.add(group);
+      else paused.delete(group);
+      if (group === "ambient" && intro && !intro.hidden) {
+        intro.pause();
+        intro.hidden = true;
+        videos.forEach((v) => io.observe(v));
+      }
+      btn.setAttribute("aria-pressed", String(nowPaused));
+      btn.textContent = `${nowPaused ? "Play" : "Pause"} ${label}`;
+      videos.filter((v) => v.dataset.group === group).forEach(sync);
+    });
+  });
 </script>
 
 <style>
   /* Hero */
   .hero {
+    position: relative;
     background: var(--deep);
     color: var(--white);
-    padding-block: clamp(32px, 5vw, 64px) clamp(56px, 8vw, 96px);
+    overflow: hidden;
+    min-height: min(86vh, 820px);
+    display: flex;
+    align-items: center;
+  }
+  .hero-bg,
+  .hero-bg video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-bg video {
+    object-fit: cover;
+    object-position: 70% 50%;
+  }
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--deep) 0%, rgba(14, 42, 71, 0.92) 30%, rgba(14, 42, 71, 0.35) 62%, rgba(14, 42, 71, 0) 80%);
+  }
+  .hero-copy {
+    position: relative;
+    z-index: 1;
+    padding-block: 72px 96px;
+    animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 3s both;
   }
   .hero h1 {
-    font-size: clamp(2.5rem, 4.8vw, 4rem);
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(32px, 5vw, 64px);
-    align-items: center;
+    font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+    max-width: 13ch;
   }
   .hero-lede {
     margin-top: 24px;
@@ -380,22 +523,17 @@ const team = [
     gap: 12px;
     margin-top: 32px;
   }
-  .hero-media {
-    margin: 0;
-    position: relative;
-  }
-  .hero-media video {
-    width: 100%;
-    border-radius: 20px;
-  }
-  .hero-media figcaption {
-    margin-top: 14px;
-    font-size: 0.9375rem;
-    color: #b9cbe0;
-    max-width: 60ch;
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      translate: 0 16px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
   .motion-toggle {
-    margin-top: 12px;
     font: inherit;
     font-size: 0.8125rem;
     font-weight: 560;
@@ -405,10 +543,17 @@ const team = [
     border-radius: 999px;
     padding: 6px 12px;
     cursor: pointer;
+    flex: none;
   }
   .motion-toggle:hover {
     color: var(--white);
     border-color: #dce6f2;
+  }
+  .hero-toggle {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 20px;
+    z-index: 2;
   }
 
   /* Container band */
@@ -461,29 +606,42 @@ const team = [
     margin-top: 10px;
     color: var(--muted);
   }
-  .nm-callout {
+  .day {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
     align-items: center;
-    gap: 40px;
+    gap: clamp(28px, 4vw, 56px);
     margin-top: 72px;
     background: var(--deep);
     color: #dce6f2;
     border-radius: 20px;
     overflow: hidden;
   }
-  .nm-callout img {
+  .day-media {
+    margin: 0;
+    position: relative;
+  }
+  .day-media video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
-  .nm-callout p {
+  .day-copy .motion-toggle {
+    margin-top: 20px;
+  }
+  .day-copy {
     padding: 32px 40px 32px 0;
-    font-size: clamp(1.25rem, 2vw, 1.625rem);
-    line-height: 1.4;
-    font-stretch: 106%;
   }
-  .nm-callout strong {
+  .day-copy p {
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    line-height: 1.45;
+  }
+  .day-nm {
+    margin-top: 20px !important;
+    padding-top: 20px;
+    border-top: 1px solid #36597f;
+    color: #b9cbe0;
+    font-size: 1rem !important;
+  }
+  .day strong {
     color: var(--v5);
     font-weight: 700;
   }
@@ -532,6 +690,33 @@ const team = [
     color: var(--muted);
     line-height: 1.4;
   }
+  .how-media {
+    margin-top: 64px;
+    margin-bottom: 0;
+  }
+  .how-media video {
+    width: 100%;
+    border-radius: 20px;
+    background: var(--deep);
+  }
+  .how-media figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 16px;
+    margin-top: 14px;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+  .how-media .motion-toggle {
+    color: var(--ink);
+    background: transparent;
+    border-color: var(--rule);
+  }
+  .how-media .motion-toggle:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
   .specs {
     margin: 80px 0 0;
     display: grid;
@@ -555,7 +740,7 @@ const team = [
     margin-top: 6px !important;
     font-size: clamp(1.75rem, 2.6vw, 2.25rem);
     font-weight: 760;
-    font-stretch: 118%;
+    font-stretch: 106%;
     line-height: 1.1;
     color: var(--blue);
   }
@@ -597,9 +782,23 @@ const team = [
 
   /* Roadmap */
   .roadmap {
+    position: relative;
+    overflow: hidden;
     background: var(--deep);
     color: var(--white);
     padding-block: var(--section);
+  }
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 85% 50%;
+    opacity: 0.13;
+  }
+  .roadmap .wrap {
+    position: relative;
   }
   .steps {
     list-style: none;
@@ -757,7 +956,6 @@ const team = [
 
   /* Responsive */
   @media (max-width: 980px) {
-    .hero-grid,
     .how-grid,
     .pilot-grid,
     .team-grid {
@@ -780,15 +978,21 @@ const team = [
   }
   @media (max-width: 700px) {
     .problem-list,
-    .nm-callout,
+    .day,
     .people {
       grid-template-columns: minmax(0, 1fr);
     }
     .problem-list {
       gap: 28px;
     }
-    .nm-callout p {
+    .day-copy {
       padding: 0 24px 28px;
+    }
+    .hero-bg video {
+      object-position: 78% 50%;
+    }
+    .hero-bg::after {
+      background: linear-gradient(180deg, rgba(14, 42, 71, 0.55) 0%, rgba(14, 42, 71, 0.88) 55%, var(--deep) 100%);
     }
     .press-list li {
       flex-direction: column;
@@ -805,6 +1009,11 @@ const team = [
     .spec + .spec {
       padding: 24px 0 0;
       border-left: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-copy {
+      animation: none;
     }
   }
 </style>

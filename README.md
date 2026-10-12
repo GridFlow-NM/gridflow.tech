@@ -16,20 +16,27 @@ npm run build    # outputs to dist/
 - Press links: `src/data/press.ts`.
 - Images, video and logos: `public/media/` and `public/brand/`.
 
-## Hero animation (Remotion)
+## Animations (Remotion)
 
-The flow-battery animation in the hero is a [Remotion](https://www.remotion.dev) project in `video/`.
+The animations are a [Remotion](https://www.remotion.dev) project in `video/`:
+
+| Composition | Where it's used | File in `public/media/` |
+|---|---|---|
+| `HeroIntro` | Plays once on load: "Welcome to GridFlow", then the flow lines meet at the G | `hero-intro.mp4` |
+| `HeroLoop` | Hero background after the intro, and the roadmap section background | `hero-loop.mp4` |
+| `DayCycle` | "One day on a solar grid": 4-hour lithium vs 12-hour vanadium | `day-cycle.mp4` |
+| `FlowBattery` | Technology section: how a flow battery charges and discharges | `flow-battery.mp4` |
 
 ```bash
 cd video
 npm install
-npm run dev                                   # preview and edit in Remotion Studio
-npx remotion render FlowBattery out/flow-battery.mp4 --codec=h264 --crf=26 --scale=0.8
-cp out/flow-battery.mp4 ../public/media/
-npx remotion still FlowBattery out/poster.png --frame=0 --scale=0.8   # then convert to public/media/flow-battery-poster.webp
+npm run dev     # preview and edit in Remotion Studio
+# re-render one, e.g.:
+npx remotion render DayCycle out/DayCycle.mp4 --codec=h264 --crf=27 --scale=0.75
+cp out/DayCycle.mp4 ../public/media/day-cycle.mp4
 ```
 
-The animation is one 12-second charge/discharge cycle and loops seamlessly. Electrolyte colors follow real vanadium charge states (V²⁺ violet, V³⁺ green, V⁴⁺ blue, V⁵⁺ yellow).
+Every loop is seamless, and the last frame of `HeroIntro` matches the first frame of `HeroLoop`. Electrolyte colors follow real vanadium charge states (V²⁺ violet, V³⁺ green, V⁴⁺ blue, V⁵⁺ yellow). On the site, animations only play while on screen, each has a pause button, and they stay still for visitors who have reduced motion turned on.
 
 Remotion is free for companies of up to 3 people. Larger teams need a company license: https://www.remotion.pro/license
 
