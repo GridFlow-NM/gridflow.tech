@@ -22,8 +22,8 @@ The animations are a [Remotion](https://www.remotion.dev) project in `video/`:
 
 | Composition | Where it's used | File in `public/media/` |
 |---|---|---|
-| `HeroIntro` | Plays once on load: "Welcome to GridFlow", then the flow lines meet at the G | `hero-intro.mp4` |
-| `HeroLoop` | Hero background after the intro, and the roadmap section background | `hero-loop.mp4` |
+| `HeroIntro` | Not used on the site right now (welcome intro: "Welcome to GridFlow", then the flow lines meet at the G) | — |
+| `HeroLoop` | Roadmap section background | `hero-loop.mp4` |
 | `DayCycle` | "One day on a solar grid": 4-hour lithium vs 12-hour vanadium | `day-cycle.mp4` |
 | `FlowBattery` | Technology section: how a flow battery charges and discharges | `flow-battery.mp4` |
 

@@ -56,21 +56,29 @@ const team = [
   {
     name: "Fred Siegele",
     role: "CEO",
+    photo: "team/fred-siegele.webp",
+    linkedin: "https://www.linkedin.com/in/fred-siegele-4919a44/",
     bio: "Three decades in specialty chemicals and equipment. Took Advanced Delivery & Chemical Systems from $80K in funding to a $230M exit.",
   },
   {
     name: "Dr. Charles Call",
     role: "Founder & CTO",
+    photo: "team/charles-call.webp",
+    linkedin: "https://www.linkedin.com/in/charles-call-76933/",
     bio: "Energy systems engineer with 25 years leading deep-tech startups, three exits and more than 40 U.S. patents. PhD, UC Davis.",
   },
   {
     name: "Dr. Sean Byrne",
     role: "Chief Scientist",
+    photo: "team/sean-byrne.webp",
+    linkedin: "https://www.linkedin.com/in/sean-byrne-515008251/",
     bio: "Electrochemist with ten years of research in batteries, electrodeposition and electrocatalysis. PhD, Caltech.",
   },
   {
     name: "Blake Ridgeway",
     role: "Board Member",
+    photo: "team/blake-ridgeway.webp",
+    linkedin: "https://www.linkedin.com/in/blake-ridgeway-994a279/",
     bio: "Former senior vice president at Public Service Company of New Mexico, with deep utility-sector relationships.",
   },
 ];
@@ -83,34 +91,6 @@ const team = [
 >
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <video
-        class="hero-intro"
-        muted
-        playsinline
-        preload="auto"
-        poster={u("media/hero-loop-poster.webp")}
-        width="1440"
-        height="810"
-        data-intro
-      >
-        <source src={u("media/hero-intro.mp4")} type="video/mp4" />
-      </video>
-      <video
-        class="hero-loop"
-        muted
-        loop
-        playsinline
-        preload="none"
-        poster={u("media/hero-loop-poster.webp")}
-        width="1440"
-        height="810"
-        data-motion
-        data-group="ambient"
-      >
-        <source src={u("media/hero-loop.mp4")} type="video/mp4" />
-      </video>
-    </div>
     <div class="wrap hero-copy">
       <h1>Grid storage that lasts decades, without the fire risk.</h1>
       <p class="hero-lede">
@@ -122,9 +102,6 @@ const team = [
         <a class="btn btn-quiet" href="#how">How it works</a>
       </div>
     </div>
-    <button class="motion-toggle hero-toggle" type="button" aria-pressed="false" data-toggle="ambient" hidden>
-      Pause background
-    </button>
   </section>
 
   <!-- Container -->
@@ -342,9 +319,26 @@ const team = [
           {
             team.map((p) => (
               <li>
-                <h3>{p.name}</h3>
-                <p class="role">{p.role}</p>
-                <p>{p.bio}</p>
+                <div class="person-head">
+                  {p.photo ? (
+                    <img class="avatar" src={u(p.photo)} alt="" width="72" height="72" loading="lazy" />
+                  ) : (
+                    <span class="avatar initials" aria-hidden="true">
+                      {p.name.replace("Dr. ", "").split(" ").map((w) => w[0]).join("")}
+                    </span>
+                  )}
+                  <div>
+                    <h3>{p.name}</h3>
+                    <p class="role">{p.role}</p>
+                  </div>
+                </div>
+                <p class="bio">{p.bio}</p>
+                <a class="linkedin" href={p.linkedin} rel="noopener" aria-label={`${p.name} on LinkedIn`}>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+                  </svg>
+                  LinkedIn
+                </a>
               </li>
             ))
           }
@@ -352,12 +346,12 @@ const team = [
         <figure class="lab">
           <img
             src={u("media/lab-team.webp")}
-            alt="Two GridFlow team members in lab coats and safety glasses reviewing results in the Albuquerque lab."
+            alt="Rudy Parra and Dr. Sean Byrne in lab coats and safety glasses reviewing results in the GridFlow lab."
             width="1800"
             height="1202"
             loading="lazy"
           />
-          <figcaption>In the GridFlow lab, Albuquerque.</figcaption>
+          <figcaption>Pictured from left to right: Rudy Parra, Lab Technician, and Dr. Sean Byrne, Chief Scientist.</figcaption>
         </figure>
       </div>
     </div>
@@ -429,27 +423,7 @@ const team = [
     { threshold: 0.15 },
   );
 
-  // Hero: play the welcome intro once, then hand off to the seamless loop.
-  const intro = document.querySelector<HTMLVideoElement>("video[data-intro]");
-  const heroLoop = document.querySelector<HTMLVideoElement>(".hero-loop");
-  if (intro && heroLoop) {
-    if (reduce) {
-      intro.hidden = true;
-      videos.forEach((v) => io.observe(v));
-    } else {
-      heroLoop.preload = "auto";
-      intro.addEventListener("ended", () => {
-        intro.hidden = true;
-        videos.forEach((v) => io.observe(v));
-      });
-      intro.play().catch(() => {
-        intro.hidden = true;
-        videos.forEach((v) => io.observe(v));
-      });
-    }
-  } else {
-    videos.forEach((v) => io.observe(v));
-  }
+  videos.forEach((v) => io.observe(v));
 
   // Pause buttons
   document.querySelectorAll<HTMLButtonElement>("button[data-toggle]").forEach((btn) => {
@@ -461,11 +435,6 @@ const team = [
       const nowPaused = !paused.has(group);
       if (nowPaused) paused.add(group);
       else paused.delete(group);
-      if (group === "ambient" && intro && !intro.hidden) {
-        intro.pause();
-        intro.hidden = true;
-        videos.forEach((v) => io.observe(v));
-      }
       btn.setAttribute("aria-pressed", String(nowPaused));
       btn.textContent = `${nowPaused ? "Play" : "Pause"} ${label}`;
       videos.filter((v) => v.dataset.group === group).forEach(sync);
@@ -480,36 +449,15 @@ const team = [
     background: var(--deep);
     color: var(--white);
     overflow: hidden;
-    min-height: min(86vh, 820px);
-    display: flex;
-    align-items: center;
-  }
-  .hero-bg,
-  .hero-bg video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .hero-bg video {
-    object-fit: cover;
-    object-position: 70% 50%;
-  }
-  .hero-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, var(--deep) 0%, rgba(14, 42, 71, 0.92) 30%, rgba(14, 42, 71, 0.35) 62%, rgba(14, 42, 71, 0) 80%);
   }
   .hero-copy {
     position: relative;
     z-index: 1;
-    padding-block: 72px 96px;
-    animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 3s both;
+    padding-block: clamp(48px, 8vw, 112px) clamp(72px, 10vw, 136px);
   }
   .hero h1 {
     font-size: clamp(2.5rem, 5.2vw, 4.5rem);
-    max-width: 13ch;
+    max-width: 16ch;
   }
   .hero-lede {
     margin-top: 24px;
@@ -522,16 +470,6 @@ const team = [
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 32px;
-  }
-  @keyframes hero-in {
-    from {
-      opacity: 0;
-      translate: 0 16px;
-    }
-    to {
-      opacity: 1;
-      translate: 0 0;
-    }
   }
   .motion-toggle {
     font: inherit;
@@ -548,12 +486,6 @@ const team = [
   .motion-toggle:hover {
     color: var(--white);
     border-color: #dce6f2;
-  }
-  .hero-toggle {
-    position: absolute;
-    right: var(--gutter);
-    bottom: 20px;
-    z-index: 2;
   }
 
   /* Container band */
@@ -864,19 +796,52 @@ const team = [
     color: var(--blue);
     font-weight: 600;
   }
-  .people p:last-child {
-    margin-top: 10px;
+  .person-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: none;
+    background: var(--deep);
+  }
+  .initials {
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-weight: 700;
+    font-stretch: 112%;
+    font-size: 1.375rem;
+  }
+  .bio {
+    margin-top: 14px;
     color: var(--muted);
     font-size: 0.9375rem;
+  }
+  .linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .linkedin:hover {
+    text-decoration: underline;
   }
   .lab {
     margin: 0;
   }
   .lab img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    object-position: 30% 50%;
+    object-position: 58% 50%;
     border-radius: 20px;
   }
   .lab figcaption {
@@ -988,12 +953,7 @@ const team = [
     .day-copy {
       padding: 0 24px 28px;
     }
-    .hero-bg video {
-      object-position: 78% 50%;
-    }
-    .hero-bg::after {
-      background: linear-gradient(180deg, rgba(14, 42, 71, 0.55) 0%, rgba(14, 42, 71, 0.88) 55%, var(--deep) 100%);
-    }
+
     .press-list li {
       flex-direction: column;
       gap: 4px;
@@ -1009,11 +969,6 @@ const team = [
     .spec + .spec {
       padding: 24px 0 0;
       border-left: 0;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-copy {
-      animation: none;
     }
   }
 </style>
