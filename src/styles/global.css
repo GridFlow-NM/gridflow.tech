@@ -1,0 +1,179 @@
+@import "@fontsource-variable/archivo/standard.css";
+
+:root {
+  /* Brand */
+  --blue: #0563a8; /* GridFlow logo blue */
+  --deep: #0e2a47; /* night-grid blue, matches the animation */
+  --ink: #13263a;
+  --muted: #4a5d72;
+  --paper: #f3f6f9;
+  --white: #ffffff;
+  --rule: #c9d5e2;
+  /* Vanadium oxidation-state colors (used only where they mean something) */
+  --v2: #7b4bc4; /* V2+ violet, negative side charged */
+  --v3: #3f9a62; /* V3+ green, negative side discharged */
+  --v4: #2f78c4; /* V4+ blue, positive side discharged */
+  --v5: #e8b93e; /* V5+ yellow, positive side charged */
+
+  --font: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --wrap: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section: clamp(72px, 10vw, 128px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-stretch: 100%;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--blue);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--deep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--v5);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-stretch: 112%;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5.6vw, 4.5rem);
+  font-weight: 760;
+}
+
+h2 {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 720;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 680;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+  max-width: 64ch;
+  text-wrap: pretty;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.lede {
+  font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 100;
+  background: var(--white);
+  padding: 8px 14px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-weight: 620;
+  font-stretch: 106%;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-primary {
+  background: var(--v5);
+  color: var(--deep);
+}
+
+.btn-primary:hover {
+  background: #f4cc63;
+  color: var(--deep);
+}
+
+.btn-quiet {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--white);
+}
+
+.btn-quiet:hover {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.btn-blue {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.btn-blue:hover {
+  background: var(--deep);
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

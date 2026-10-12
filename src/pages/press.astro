@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import { press } from "../data/press";
+---
+
+<Base title="Press | GridFlow" description="News coverage of GridFlow, the Albuquerque company bringing vanadium flow batteries to the U.S. grid.">
+  <section class="page">
+    <div class="wrap">
+      <h1>Press</h1>
+      <p class="lede">
+        Coverage of GridFlow. For media inquiries, email <a href="mailto:info@gridflow.tech">info@gridflow.tech</a>.
+      </p>
+      <ul class="list">
+        {
+          press.map((p) => (
+            <li>
+              <a href={p.url} rel="noopener">
+                {p.title}
+              </a>
+              <span>{p.date ? `${p.outlet}, ${p.date}` : p.outlet}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page {
+    padding-block: clamp(48px, 8vw, 96px) var(--section);
+  }
+  .lede {
+    margin-top: 16px;
+  }
+  .list {
+    list-style: none;
+    margin: 48px 0 0;
+    padding: 0;
+  }
+  .list li {
+    display: grid;
+    gap: 4px;
+    padding-block: 22px;
+    border-top: 1px solid var(--rule);
+  }
+  .list li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  .list a {
+    font-size: 1.25rem;
+    font-weight: 620;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .list a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .list span {
+    color: var(--muted);
+  }
+</style>

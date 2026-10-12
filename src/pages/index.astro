@@ -1,0 +1,810 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+import { press } from "../data/press";
+
+const specs = [
+  {
+    value: "Water‑based",
+    name: "Negligible fire risk",
+    text: "The electrolyte is mostly water. There is no thermal runaway and nothing to explode.",
+  },
+  {
+    value: "20–30 years",
+    name: "Long service life",
+    text: "Nearly unlimited charge cycles with no capacity fade, which lowers the cost of every kilowatt-hour stored.",
+  },
+  {
+    value: "4–12+ hours",
+    name: "Long duration",
+    text: "Sized for the evening peak and the overnight hours that solar-heavy grids need covered.",
+  },
+  {
+    value: "100%",
+    name: "Recyclable electrolyte",
+    text: "The vanadium is recovered at end of life and keeps its value. No hazardous battery waste.",
+  },
+];
+
+const states = [
+  { color: "var(--v2)", ion: "V²⁺", label: "Negative side, charged" },
+  { color: "var(--v3)", ion: "V³⁺", label: "Negative side, discharged" },
+  { color: "var(--v5)", ion: "V⁵⁺", label: "Positive side, charged" },
+  { color: "var(--v4)", ion: "V⁴⁺", label: "Positive side, discharged" },
+];
+
+const roadmap = [
+  {
+    title: "Install proven systems",
+    text: "Deploy commercially proven vanadium flow batteries from established manufacturers, backed by our own engineering and service team.",
+  },
+  {
+    title: "Assemble in New Mexico",
+    text: "Move system assembly to New Mexico, building local jobs and a local supply chain.",
+  },
+  {
+    title: "Make electrolyte here",
+    text: "Produce vanadium electrolyte in New Mexico, the key material in every flow battery.",
+  },
+  {
+    title: "Lease the electrolyte",
+    text: "Offer electrolyte on long-term lease so customers pay less up front for storage.",
+  },
+];
+
+const team = [
+  {
+    name: "Fred Siegele",
+    role: "CEO",
+    bio: "Three decades in specialty chemicals and equipment. Took Advanced Delivery & Chemical Systems from $80K in funding to a $230M exit.",
+  },
+  {
+    name: "Dr. Charles Call",
+    role: "Founder & CTO",
+    bio: "Energy systems engineer with 25 years leading deep-tech startups, three exits and more than 40 U.S. patents. PhD, UC Davis.",
+  },
+  {
+    name: "Dr. Sean Byrne",
+    role: "Chief Scientist",
+    bio: "Electrochemist with ten years of research in batteries, electrodeposition and electrocatalysis. PhD, Caltech.",
+  },
+  {
+    name: "Blake Ridgeway",
+    role: "Board Member",
+    bio: "Former senior vice president at Public Service Company of New Mexico, with deep utility-sector relationships.",
+  },
+];
+---
+
+<Base
+  title="GridFlow | Vanadium flow batteries for the grid"
+  description="GridFlow brings containerized vanadium flow batteries to U.S. utilities, co-ops and businesses: long-duration storage with negligible fire risk and a 20–30 year life. Based in Albuquerque, NM."
+  darkHeader
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Grid storage that lasts decades, without the fire risk.</h1>
+        <p class="hero-lede">
+          GridFlow brings containerized vanadium flow batteries to American utilities, co-ops and businesses,
+          starting here in New Mexico.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={u("/contact-us/")}>Talk to our team</a>
+          <a class="btn btn-quiet" href="#how">How it works</a>
+        </div>
+      </div>
+      <figure class="hero-media">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster={u("media/flow-battery-poster.webp")}
+          aria-describedby="anim-caption"
+          width="1280"
+          height="800"
+          data-motion
+        >
+          <source src={u("media/flow-battery.mp4")} type="video/mp4" />
+        </video>
+        <figcaption id="anim-caption">
+          A flow battery through one cycle: solar charges it, then it powers the grid. The electrolyte changes color
+          as it stores energy.
+        </figcaption>
+        <button class="motion-toggle" type="button" aria-pressed="false" hidden>Pause animation</button>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Container -->
+  <section class="container-band" aria-labelledby="container-h">
+    <span class="illus">Illustration</span>
+    <img
+      src={u("media/container-desert.webp")}
+      alt="Illustration of a GridFlow vanadium battery in a shipping container, doors open to show the cell stack, set in New Mexico high desert with transmission lines behind it."
+      width="1535"
+      height="1024"
+      loading="lazy"
+    />
+    <div class="wrap container-copy">
+      <h2 id="container-h">Proven overseas. New to the U.S.</h2>
+      <p class="lede">
+        Vanadium flow batteries already run at commercial scale abroad. GridFlow sources containerized systems from
+        established manufacturers outside China, and handles the engineering, installation and service here.
+      </p>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem" aria-labelledby="problem-h">
+    <div class="wrap">
+      <h2 id="problem-h">Lithium-ion wasn't built for the grid.</h2>
+      <p class="lede problem-lede">
+        Solar and wind are now the fastest way to meet growing demand, but they only generate part of the day. The
+        storage that fills the gaps is mostly lithium-ion, and it falls short in three ways.
+      </p>
+      <div class="problem-list">
+        <div>
+          <h3>It can burn</h3>
+          <p>
+            Lithium cells can go into thermal runaway. Fires like the January 2025 one at the Moss Landing storage
+            plant in California are pushing states and towns to restrict new projects.
+          </p>
+        </div>
+        <div>
+          <h3>It runs out too soon</h3>
+          <p>
+            Lithium-ion gets expensive beyond about four hours of storage, well short of a full evening and night on
+            a solar-heavy grid.
+          </p>
+        </div>
+        <div>
+          <h3>It wears out</h3>
+          <p>Every charge cycle costs a little capacity, so systems hold less energy each year.</p>
+        </div>
+      </div>
+      <div class="nm-callout">
+        <img src={u("media/nm-map.webp")} alt="" width="1024" height="559" loading="lazy" />
+        <p>
+          New Mexico plans to reach 80% renewable power by 2040, and by our estimate its grid is already about
+          <strong>3,000 MWh</strong> short of the storage its existing solar needs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="how" aria-labelledby="how-h">
+    <div class="wrap how-grid">
+      <div>
+        <h2 id="how-h">How a vanadium flow battery works</h2>
+        <p class="lede">
+          Energy is stored in two tanks of liquid electrolyte. Pumps move the liquid through a cell stack, where
+          vanadium ions trade electrons across a thin membrane.
+        </p>
+        <p class="how-p">
+          Charging and discharging only change the vanadium's charge state, so nothing in the chemistry wears out.
+          Each state has its own color, which is why the electrolyte visibly shifts as the battery fills. Need more
+          hours of storage? Use bigger tanks.
+        </p>
+      </div>
+      <dl class="states" aria-label="Vanadium charge states and their colors">
+        {
+          states.map((s) => (
+            <div class="state">
+              <dt>
+                <span class="swatch" style={`background:${s.color}`} />
+                {s.ion}
+              </dt>
+              <dd>{s.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="wrap">
+      <dl class="specs">
+        {
+          specs.map((s) => (
+            <div class="spec">
+              <dt>{s.name}</dt>
+              <dd class="spec-value">{s.value}</dd>
+              <dd class="spec-text">{s.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- Pilot -->
+  <section id="pilot" class="pilot" aria-labelledby="pilot-h">
+    <div class="wrap pilot-grid">
+      <figure class="render">
+        <img
+          src={u("media/grid-scale-render.webp")}
+          alt="Illustration of rows of GridFlow battery containers beside a solar farm in the New Mexico desert."
+          width="1152"
+          height="923"
+          loading="lazy"
+        />
+        <figcaption>Illustration of a future grid-scale site.</figcaption>
+      </figure>
+      <div>
+        <h2 id="pilot-h">We've won our first pilot.</h2>
+        <p class="lede">
+          The New Mexico Energy, Minerals and Natural Resources Department and Kit Carson Electric Cooperative have
+          awarded GridFlow a pilot contract for an 80&nbsp;kWh vanadium flow battery, scheduled for installation in
+          late 2026.
+        </p>
+        <p class="pilot-p">
+          GridFlow has also received the New Mexico Advanced Energy Award from the state Economic Development
+          Department.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="roadmap" aria-labelledby="roadmap-h">
+    <div class="wrap">
+      <h2 id="roadmap-h">Built in New Mexico, step by step</h2>
+      <ol class="steps">
+        {
+          roadmap.map((s) => (
+            <li>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="team" aria-labelledby="team-h">
+    <div class="wrap">
+      <h2 id="team-h">Scientists, builders and utility veterans</h2>
+      <div class="team-grid">
+        <ul class="people">
+          {
+            team.map((p) => (
+              <li>
+                <h3>{p.name}</h3>
+                <p class="role">{p.role}</p>
+                <p>{p.bio}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <figure class="lab">
+          <img
+            src={u("media/lab-team.webp")}
+            alt="Two GridFlow team members in lab coats and safety glasses reviewing results in the Albuquerque lab."
+            width="1800"
+            height="1202"
+            loading="lazy"
+          />
+          <figcaption>In the GridFlow lab, Albuquerque.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press -->
+  <section class="press" aria-labelledby="press-h">
+    <div class="wrap">
+      <div class="press-head">
+        <h2 id="press-h">In the news</h2>
+        <a href={u("/press/")}>All coverage</a>
+      </div>
+      <ul class="press-list">
+        {
+          press.slice(0, 3).map((p) => (
+            <li>
+              <a href={p.url} rel="noopener">
+                {p.title}
+              </a>
+              <span>{p.date ? `${p.outlet}, ${p.date}` : p.outlet}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="cta" aria-labelledby="cta-h">
+    <img src={u("media/glovebox.webp")} alt="" width="1800" height="1202" loading="lazy" />
+    <div class="wrap cta-inner">
+      <h2 id="cta-h">Planning storage, or want to invest?</h2>
+      <p class="lede">
+        We work with utilities, co-ops, independent power producers and large energy users, and we're raising capital
+        to scale U.S. production.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={u("/contact-us/")}>Talk to our team</a>
+        <a class="btn btn-quiet" href="mailto:info@gridflow.tech">info@gridflow.tech</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Respect reduced-motion and let anyone pause the looping animation.
+  const video = document.querySelector<HTMLVideoElement>("video[data-motion]");
+  const toggle = document.querySelector<HTMLButtonElement>(".motion-toggle");
+  if (video && toggle) {
+    toggle.hidden = false;
+    const set = (paused: boolean) => {
+      if (paused) video.pause();
+      else video.play().catch(() => {});
+      toggle.setAttribute("aria-pressed", String(paused));
+      toggle.textContent = paused ? "Play animation" : "Pause animation";
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) set(true);
+    toggle.addEventListener("click", () => set(!video.paused));
+  }
+</script>
+
+<style>
+  /* Hero */
+  .hero {
+    background: var(--deep);
+    color: var(--white);
+    padding-block: clamp(32px, 5vw, 64px) clamp(56px, 8vw, 96px);
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 4.8vw, 4rem);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+  .hero-lede {
+    margin-top: 24px;
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    color: #dce6f2;
+    max-width: 38ch;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .hero-media {
+    margin: 0;
+    position: relative;
+  }
+  .hero-media video {
+    width: 100%;
+    border-radius: 20px;
+  }
+  .hero-media figcaption {
+    margin-top: 14px;
+    font-size: 0.9375rem;
+    color: #b9cbe0;
+    max-width: 60ch;
+  }
+  .motion-toggle {
+    margin-top: 12px;
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 560;
+    color: #dce6f2;
+    background: rgba(14, 42, 71, 0.8);
+    border: 1px solid #36597f;
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .motion-toggle:hover {
+    color: var(--white);
+    border-color: #dce6f2;
+  }
+
+  /* Container band */
+  .container-band {
+    position: relative;
+    background: var(--deep);
+  }
+  .illus {
+    position: absolute;
+    top: 16px;
+    right: var(--gutter);
+    z-index: 1;
+    font-size: 0.8125rem;
+    color: #dce6f2;
+    background: rgba(14, 42, 71, 0.7);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .container-band > img {
+    width: 100%;
+    max-height: 78vh;
+    object-fit: cover;
+    object-position: 50% 62%;
+  }
+  .container-copy {
+    padding-block: 40px 72px;
+    color: var(--white);
+  }
+  .container-copy .lede {
+    margin-top: 16px;
+    color: #dce6f2;
+  }
+
+  /* Problem */
+  .problem {
+    padding-block: var(--section);
+  }
+  .problem-lede {
+    margin-top: 20px;
+  }
+  .problem-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 56px;
+    border-top: 2px solid var(--ink);
+    padding-top: 28px;
+  }
+  .problem-list p {
+    margin-top: 10px;
+    color: var(--muted);
+  }
+  .nm-callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    margin-top: 72px;
+    background: var(--deep);
+    color: #dce6f2;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .nm-callout img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .nm-callout p {
+    padding: 32px 40px 32px 0;
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    line-height: 1.4;
+    font-stretch: 106%;
+  }
+  .nm-callout strong {
+    color: var(--v5);
+    font-weight: 700;
+  }
+
+  /* How */
+  .how {
+    background: var(--white);
+    padding-block: var(--section);
+  }
+  .how-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: end;
+  }
+  .how .lede {
+    margin-top: 20px;
+  }
+  .how-p {
+    margin-top: 16px;
+    color: var(--muted);
+  }
+  .states {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 24px;
+  }
+  .state dt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-stretch: 110%;
+  }
+  .swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .state dd {
+    margin: 4px 0 0 52px;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .specs {
+    margin: 80px 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 2px solid var(--ink);
+  }
+  .spec {
+    padding: 24px 24px 0 0;
+  }
+  .spec + .spec {
+    padding-left: 24px;
+    border-left: 1px solid var(--rule);
+  }
+  .spec dt {
+    font-weight: 620;
+  }
+  .spec dd {
+    margin: 0;
+  }
+  .spec-value {
+    margin-top: 6px !important;
+    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+    font-weight: 760;
+    font-stretch: 118%;
+    line-height: 1.1;
+    color: var(--blue);
+  }
+  .spec-text {
+    margin-top: 12px !important;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  /* Pilot */
+  .pilot {
+    padding-block: var(--section);
+  }
+  .pilot-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+  .render {
+    margin: 0;
+  }
+  .render img {
+    width: 100%;
+    border-radius: 20px;
+  }
+  .render figcaption {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .pilot .lede {
+    margin-top: 20px;
+  }
+  .pilot-p {
+    margin-top: 16px;
+    color: var(--muted);
+  }
+
+  /* Roadmap */
+  .roadmap {
+    background: var(--deep);
+    color: var(--white);
+    padding-block: var(--section);
+  }
+  .steps {
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+    counter-reset: step;
+  }
+  .steps li {
+    counter-increment: step;
+    border-top: 2px solid #36597f;
+    padding-top: 20px;
+    position: relative;
+  }
+  .steps li:first-child {
+    border-top-color: var(--v5);
+  }
+  .steps li::before {
+    content: counter(step);
+    display: block;
+    font-size: 3rem;
+    font-weight: 760;
+    font-stretch: 120%;
+    line-height: 1;
+    color: #5e7fa3;
+    margin-bottom: 16px;
+  }
+  .steps li:first-child::before {
+    color: var(--v5);
+  }
+  .steps p {
+    margin-top: 10px;
+    color: #b9cbe0;
+  }
+
+  /* Team */
+  .team {
+    padding-block: var(--section);
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(32px, 5vw, 72px);
+    margin-top: 48px;
+    align-items: start;
+  }
+  .people {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 32px;
+  }
+  .people li {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+  }
+  .role {
+    margin-top: 2px;
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .people p:last-child {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+  .lab {
+    margin: 0;
+  }
+  .lab img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 30% 50%;
+    border-radius: 20px;
+  }
+  .lab figcaption {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  /* Press */
+  .press {
+    background: var(--white);
+    padding-block: clamp(64px, 8vw, 96px);
+  }
+  .press-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .press-head a {
+    font-weight: 600;
+  }
+  .press-list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+  }
+  .press-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 18px;
+    border-top: 1px solid var(--rule);
+  }
+  .press-list li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  .press-list a {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .press-list a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+  .press-list span {
+    color: var(--muted);
+    white-space: nowrap;
+    font-size: 0.9375rem;
+  }
+
+  /* CTA */
+  .cta {
+    position: relative;
+    color: var(--white);
+    background: var(--deep);
+    overflow: hidden;
+  }
+  .cta > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.14;
+  }
+  .cta-inner {
+    position: relative;
+    padding-block: clamp(80px, 11vw, 140px);
+  }
+  .cta .lede {
+    margin-top: 20px;
+    color: #dce6f2;
+  }
+
+  /* Responsive */
+  @media (max-width: 980px) {
+    .hero-grid,
+    .how-grid,
+    .pilot-grid,
+    .team-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .specs,
+    .steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .spec:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .spec:nth-child(n + 3) {
+      padding-top: 32px;
+    }
+    .lab img {
+      aspect-ratio: 3 / 2;
+    }
+  }
+  @media (max-width: 700px) {
+    .problem-list,
+    .nm-callout,
+    .people {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .problem-list {
+      gap: 28px;
+    }
+    .nm-callout p {
+      padding: 0 24px 28px;
+    }
+    .press-list li {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+  @media (max-width: 520px) {
+    .specs,
+    .steps,
+    .states {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .spec,
+    .spec + .spec {
+      padding: 24px 0 0;
+      border-left: 0;
+    }
+  }
+</style>

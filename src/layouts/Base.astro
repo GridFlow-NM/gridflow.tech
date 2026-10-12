@@ -1,0 +1,188 @@
+---
+import "../styles/global.css";
+import { u } from "../lib/url";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Header sits on the dark hero */
+  darkHeader?: boolean;
+}
+
+const { title, description, darkHeader = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(import.meta.env.BASE_URL, "/"), Astro.site);
+const ogImage = new URL("media/container-desert.webp", Astro.site);
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={u("favicon.png")} />
+    <link rel="apple-touch-icon" href={u("apple-touch-icon.png")} />
+    <meta name="theme-color" content="#0e2a47" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GridFlow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class:list={["site-header", { dark: darkHeader }]}>
+      <div class="wrap bar">
+        <a class="logo" href={u("/")} aria-label="GridFlow home">
+          <img
+            src={u(darkHeader ? "brand/gridflow-logo-dark-bg.png" : "brand/gridflow-logo-light-bg.png")}
+            alt="GridFlow"
+            width="444"
+            height="196"
+          />
+        </a>
+        <nav aria-label="Main">
+          <a href={u("/#how")}>Technology</a>
+          <a href={u("/#pilot")}>Projects</a>
+          <a href={u("/#team")}>Team</a>
+          <a href={u("/press/")}>Press</a>
+          <a class="nav-cta" href={u("/contact-us/")}>Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <div>
+          <img src={u("brand/gridflow-logo-dark-bg.png")} alt="GridFlow" width="444" height="196" class="foot-logo" />
+          <p>Vanadium flow batteries for long-duration grid storage. Based in Albuquerque, New Mexico.</p>
+        </div>
+        <div class="foot-links">
+          <a href={u("/#how")}>Technology</a>
+          <a href={u("/#pilot")}>Projects</a>
+          <a href={u("/#team")}>Team</a>
+          <a href={u("/press/")}>Press</a>
+          <a href={u("/contact-us/")}>Contact</a>
+          <a href="mailto:info@gridflow.tech">info@gridflow.tech</a>
+        </div>
+      </div>
+      <div class="wrap legal">© {year} GridFlow Inc.</div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 10;
+    background: var(--paper);
+  }
+  .site-header.dark {
+    background: var(--deep);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 84px;
+  }
+  .logo img {
+    width: auto;
+    height: 52px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.4vw, 32px);
+    font-weight: 560;
+    font-stretch: 104%;
+  }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--blue);
+  }
+  .dark nav a {
+    color: #dce6f2;
+  }
+  .dark nav a:hover {
+    color: var(--white);
+  }
+  .nav-cta {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 2px solid currentColor;
+  }
+
+  @media (max-width: 760px) {
+    .bar {
+      flex-wrap: wrap;
+      padding-block: 12px;
+      gap: 6px 16px;
+    }
+    .logo img {
+      height: 44px;
+    }
+    nav {
+      width: 100%;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      gap: 10px;
+    }
+    .nav-cta {
+      padding: 4px 12px;
+    }
+  }
+
+  .site-footer {
+    background: var(--deep);
+    color: #b9cbe0;
+    padding-block: 64px 28px;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .foot p {
+    max-width: 34ch;
+    margin-top: 16px;
+  }
+  .foot-logo {
+    width: auto;
+    height: 64px;
+  }
+  .foot-links {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px 48px;
+    align-content: start;
+  }
+  .foot-links a {
+    color: #dce6f2;
+    text-decoration: none;
+  }
+  .foot-links a:hover {
+    color: var(--white);
+    text-decoration: underline;
+  }
+  .legal {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #23476e;
+    font-size: 0.875rem;
+  }
+</style>

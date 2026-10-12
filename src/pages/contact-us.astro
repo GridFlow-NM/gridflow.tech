@@ -1,0 +1,85 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+---
+
+<Base title="Contact | GridFlow" description="Contact GridFlow about vanadium flow battery projects, partnerships or investment.">
+  <section class="page">
+    <div class="wrap grid">
+      <div>
+        <h1>Let's talk storage.</h1>
+        <p class="lede">
+          Questions about a project, a partnership or investing in GridFlow? Email us and the right person will get
+          back to you.
+        </p>
+        <a class="btn btn-blue mail" href="mailto:info@gridflow.tech">Email info@gridflow.tech</a>
+        <dl class="topics">
+          <div>
+            <dt>Utilities, co-ops and developers</dt>
+            <dd>Long-duration storage projects, pilots and site evaluations.</dd>
+          </div>
+          <div>
+            <dt>Investors</dt>
+            <dd>GridFlow is raising capital to scale U.S. deployment and New Mexico manufacturing.</dd>
+          </div>
+          <div>
+            <dt>Media</dt>
+            <dd>Interviews, background and images.</dd>
+          </div>
+        </dl>
+      </div>
+      <img
+        src={u("media/lab-glovebox-wide.webp")}
+        alt="GridFlow team members working at a glovebox in the Albuquerque lab."
+        width="1800"
+        height="1202"
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page {
+    padding-block: clamp(48px, 8vw, 96px) var(--section);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+  .lede {
+    margin-top: 20px;
+  }
+  .mail {
+    margin-top: 32px;
+  }
+  .topics {
+    margin: 48px 0 0;
+  }
+  .topics div {
+    border-top: 1px solid var(--rule);
+    padding-block: 16px;
+  }
+  .topics dt {
+    font-weight: 650;
+  }
+  .topics dd {
+    margin: 4px 0 0;
+    color: var(--muted);
+  }
+  img {
+    width: 100%;
+    border-radius: 20px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    img {
+      aspect-ratio: 3 / 2;
+    }
+  }
+</style>
