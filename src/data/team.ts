@@ -51,7 +51,7 @@ export const team: Person[] = [
   },
   {
     name: "Matthew Call",
-    role: "Engineering Intern",
+    role: "Prototyping Engineer",
     photo: "team/matthew-call.webp",
     linkedin: "https://www.linkedin.com/in/matthew-call42/",
     bio: "Builds and tests prototype hardware in the lab, working across IoT sensors, microcontrollers, C++ and SOLIDWORKS. Joined in 2024 after six years in production manufacturing.",
