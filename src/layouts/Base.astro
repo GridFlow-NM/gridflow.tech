@@ -11,7 +11,19 @@ interface Props {
 
 const { title, description, darkHeader = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname.replace(import.meta.env.BASE_URL, "/"), Astro.site);
-const ogImage = new URL("media/container-desert.webp", Astro.site);
+const ogImage = new URL("og-image.jpg", Astro.site);
+const orgSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "GridFlow",
+  legalName: "GridFlow Inc.",
+  url: "https://gridflow.tech",
+  logo: "https://gridflow.tech/brand/g-mark.png",
+  email: "info@gridflow.tech",
+  description: "GridFlow brings containerized vanadium flow batteries to U.S. utilities, co-ops and businesses.",
+  address: { "@type": "PostalAddress", addressLocality: "Albuquerque", addressRegion: "NM", addressCountry: "US" },
+  sameAs: ["https://www.linkedin.com/company/gridflow-tech/"],
+});
 const year = new Date().getFullYear();
 ---
 
@@ -32,7 +44,12 @@ const year = new Date().getFullYear();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="GridFlow: grid storage that lasts decades, without the fire risk." />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href={u("sitemap-index.xml")} />
+    <script type="application/ld+json" set:html={orgSchema} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

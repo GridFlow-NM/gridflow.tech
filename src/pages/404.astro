@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+---
+
+<Base title="Page not found | GridFlow" description="This page doesn't exist." darkHeader>
+  <section class="nf">
+    <div class="wrap">
+      <p class="code">404</p>
+      <h1>We couldn't find that page.</h1>
+      <p class="lede">
+        It may have moved when we rebuilt our website. Try one of these instead, or email
+        <a href="mailto:info@gridflow.tech">info@gridflow.tech</a>.
+      </p>
+      <ul class="links">
+        <li><a href={u("/")}>Home</a></li>
+        <li><a href={u("/about/")}>About</a></li>
+        <li><a href={u("/#how")}>Technology</a></li>
+        <li><a href={u("/team/")}>Team</a></li>
+        <li><a href={u("/contact-us/")}>Contact</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    background: var(--deep);
+    color: var(--white);
+    padding-block: clamp(56px, 10vw, 140px);
+  }
+  .code {
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 780;
+    font-stretch: 120%;
+    line-height: 1;
+    color: var(--v5);
+  }
+  h1 {
+    margin-top: 16px;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  .lede {
+    margin-top: 16px;
+    color: #dce6f2;
+  }
+  .lede a {
+    color: var(--white);
+  }
+  .links {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .links a:hover {
+    border-color: var(--white);
+  }
+</style>
