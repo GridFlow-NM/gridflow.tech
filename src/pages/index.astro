@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { u } from "../lib/url";
 import { press } from "../data/press";
+import { supporters } from "../data/supporters";
 import { team } from "../data/team";
 import PersonCard from "../components/PersonCard.astro";
 
@@ -250,6 +251,22 @@ const leaders = team.filter((p) => p.leader);
           Department.
         </p>
       </div>
+    </div>
+  </section>
+
+  <!-- Supporters -->
+  <section class="supporters" aria-labelledby="supporters-h">
+    <div class="wrap">
+      <h2 id="supporters-h">Supported by</h2>
+      <ul class="logo-grid">
+        {
+          supporters.map((s) => (
+            <li>
+              <img src={u(s.logo)} alt={s.name} loading="lazy" />
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
@@ -647,6 +664,52 @@ const leaders = team.filter((p) => p.leader);
   .pilot-p {
     margin-top: 16px;
     color: var(--muted);
+  }
+
+  /* Supporters */
+  .supporters {
+    background: var(--white);
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .supporters h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .logo-grid {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .logo-grid li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 136px;
+    padding: 24px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .logo-grid img {
+    max-width: 100%;
+    max-height: 72px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  @media (max-width: 860px) {
+    .logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .logo-grid li {
+      min-height: 112px;
+      padding: 18px;
+    }
+    .logo-grid img {
+      max-height: 56px;
+    }
   }
 
   /* Roadmap */
