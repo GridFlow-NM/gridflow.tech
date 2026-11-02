@@ -76,7 +76,10 @@ const year = new Date().getFullYear();
           <a href="mailto:info@gridflow.tech">info@gridflow.tech</a>
         </div>
       </div>
-      <div class="wrap legal">© {year} GridFlow Inc.</div>
+      <div class="wrap legal">
+        <span>© {year} GridFlow Inc.</span>
+        <a href={u("/privacy/")}>Privacy</a>
+      </div>
     </footer>
   </body>
 </html>
@@ -185,5 +188,15 @@ const year = new Date().getFullYear();
     padding-top: 20px;
     border-top: 1px solid #23476e;
     font-size: 0.875rem;
+  }
+  .legal {
+    display: flex;
+    gap: 24px;
+  }
+  .legal a {
+    color: #dce6f2;
+  }
+  .legal a:hover {
+    color: var(--white);
   }
 </style>

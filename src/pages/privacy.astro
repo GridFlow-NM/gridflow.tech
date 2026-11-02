@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+
+const updated = "November 2, 2026";
+---
+
+<Base
+  title="Privacy | GridFlow"
+  description="How the GridFlow website handles your information: no cookies, no tracking, and email only when you write to us."
+  darkHeader
+>
+  <PageHeader title="Privacy" lede={`Last updated ${updated}`} />
+
+  <section class="policy">
+    <div class="wrap prose">
+      <p class="intro">
+        This page explains what information the GridFlow website collects and how we use it. The short version: we don't
+        track you, and we only have your information if you choose to email us.
+      </p>
+
+      <h2>Who we are</h2>
+      <p>
+        This website is run by GridFlow Inc., based in Albuquerque, New Mexico. You can reach us at
+        <a href="mailto:info@gridflow.tech">info@gridflow.tech</a>.
+      </p>
+
+      <h2>Cookies and tracking</h2>
+      <p>
+        This website doesn't use cookies, analytics, advertising pixels or any other tracking tools. It doesn't store
+        anything in your browser, and it doesn't load content from social media or ad networks. If we ever add tools like
+        these, we'll update this page first.
+      </p>
+
+      <h2>Information you send us</h2>
+      <p>
+        When you email us, for example about a project, a job or investing, we receive whatever you include, such as your
+        name, email address and message. We use it only to reply to you and follow up on what you asked about. We don't
+        sell or rent your information, and we only share it when we need to in order to respond to you or when the law
+        requires it.
+      </p>
+      <p>
+        If you'd like us to delete your messages or information, email
+        <a href="mailto:info@gridflow.tech">info@gridflow.tech</a> and we'll take care of it.
+      </p>
+
+      <h2>Website hosting</h2>
+      <p>
+        The site is hosted by GitHub. Like most web hosts, GitHub may log basic technical information such as IP addresses
+        to keep the service secure and running. GitHub handles that information under its own
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener"
+          >privacy statement</a
+        >. We don't use these logs to identify visitors.
+      </p>
+
+      <h2>Links to other sites</h2>
+      <p>
+        We link to other websites, such as news articles and LinkedIn profiles. Once you leave our site, that site's own
+        privacy policy applies.
+      </p>
+
+      <h2>Children's privacy</h2>
+      <p>This website is meant for a general business audience. We don't knowingly collect information from children.</p>
+
+      <h2>Changes to this page</h2>
+      <p>
+        If how we handle information changes, we'll update this page and the date at the top. Questions? Email
+        <a href="mailto:info@gridflow.tech">info@gridflow.tech</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .policy {
+    padding-block: clamp(56px, 8vw, 96px) var(--section);
+  }
+  .intro {
+    font-size: 1.25rem;
+    line-height: 1.55;
+  }
+  .prose h2 {
+    font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+    margin-top: 48px;
+  }
+  .prose p {
+    margin-top: 14px;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+</style>
