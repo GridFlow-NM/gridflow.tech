@@ -258,15 +258,27 @@ const leaders = team.filter((p) => p.leader);
   <section class="supporters" aria-labelledby="supporters-h">
     <div class="wrap">
       <h2 id="supporters-h">Supported by</h2>
-      <ul class="logo-grid">
-        {
-          supporters.map((s) => (
-            <li>
-              <img src={u(s.logo)} alt={s.name} loading="lazy" />
-            </li>
-          ))
-        }
-      </ul>
+      <div class="marquee" data-marquee>
+        <ul class="marquee-track">
+          {
+            supporters.map((s) => (
+              <li>
+                <img src={u(s.logo)} alt={s.name} />
+              </li>
+            ))
+          }
+          {
+            supporters.map((s) => (
+              <li class="dupe" aria-hidden="true">
+                <img src={u(s.logo)} alt="" />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <button class="motion-toggle marquee-toggle" type="button" aria-pressed="false" data-marquee-toggle hidden>
+        Pause logos
+      </button>
     </div>
   </section>
 
@@ -394,6 +406,18 @@ const leaders = team.filter((p) => p.leader);
       videos.filter((v) => v.dataset.group === group).forEach(sync);
     });
   });
+
+  // Supporter logo carousel pause button
+  const marquee = document.querySelector<HTMLElement>("[data-marquee]");
+  const marqueeBtn = document.querySelector<HTMLButtonElement>("[data-marquee-toggle]");
+  if (marquee && marqueeBtn && !reduce) {
+    marqueeBtn.hidden = false;
+    marqueeBtn.addEventListener("click", () => {
+      const nowPaused = marquee.classList.toggle("paused");
+      marqueeBtn.setAttribute("aria-pressed", String(nowPaused));
+      marqueeBtn.textContent = nowPaused ? "Play logos" : "Pause logos";
+    });
+  }
 </script>
 
 <style>
@@ -674,41 +698,86 @@ const leaders = team.filter((p) => p.leader);
   .supporters h2 {
     font-size: clamp(1.75rem, 3vw, 2.25rem);
   }
-  .logo-grid {
-    list-style: none;
-    margin: 36px 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
+  .marquee {
+    margin-top: 36px;
+    overflow: hidden;
+    border-block: 1px solid var(--rule);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
-  .logo-grid li {
+  .marquee-track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: max-content;
+    animation: marquee 45s linear infinite;
+  }
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track,
+  .marquee.paused .marquee-track {
+    animation-play-state: paused;
+  }
+  .marquee-track li {
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 136px;
-    padding: 24px;
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
+    height: 128px;
+    padding-inline: 44px;
   }
-  .logo-grid img {
-    max-width: 100%;
-    max-height: 72px;
+  .marquee-track img {
+    max-height: 64px;
+    max-width: 240px;
     width: auto;
     height: auto;
     object-fit: contain;
   }
-  @media (max-width: 860px) {
-    .logo-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
     }
-    .logo-grid li {
-      min-height: 112px;
-      padding: 18px;
+    to {
+      transform: translateX(-50%);
     }
-    .logo-grid img {
-      max-height: 56px;
+  }
+  .marquee-toggle {
+    margin-top: 16px;
+    color: var(--ink);
+    background: transparent;
+    border-color: var(--rule);
+  }
+  .marquee-toggle:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
+  @media (max-width: 700px) {
+    .marquee-track {
+      animation-duration: 32s;
+    }
+    .marquee-track li {
+      height: 104px;
+      padding-inline: 28px;
+    }
+    .marquee-track img {
+      max-height: 52px;
+      max-width: 180px;
+    }
+  }
+  /* Reduced motion: no scrolling, show every logo in a wrapped row */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .marquee-track {
+      animation: none;
+      width: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .marquee-track .dupe {
+      display: none;
     }
   }
 
