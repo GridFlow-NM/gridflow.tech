@@ -6,28 +6,6 @@ import { supporters } from "../data/supporters";
 import { team } from "../data/team";
 import PersonCard from "../components/PersonCard.astro";
 
-const specs = [
-  {
-    value: "Water‑based",
-    name: "Negligible fire risk",
-    text: "The electrolyte is mostly water. There is no thermal runaway and nothing to explode.",
-  },
-  {
-    value: "20–30 years",
-    name: "Long service life",
-    text: "Nearly unlimited charge cycles with no capacity fade, which lowers the cost of every kilowatt-hour stored.",
-  },
-  {
-    value: "4–12+ hours",
-    name: "Long duration",
-    text: "Sized for the evening peak and the overnight hours that solar-heavy grids need covered.",
-  },
-  {
-    value: "100%",
-    name: "Recyclable electrolyte",
-    text: "The vanadium is recovered at end of life and keeps its value. No hazardous battery waste.",
-  },
-];
 
 const states = [
   { color: "var(--v2)", ion: "V²⁺", label: "Negative side, charged" },
@@ -36,24 +14,6 @@ const states = [
   { color: "var(--v4)", ion: "V⁴⁺", label: "Positive side, discharged" },
 ];
 
-const roadmap = [
-  {
-    title: "Install proven systems",
-    text: "Deploy commercially proven vanadium flow batteries from established manufacturers, backed by our own engineering and service team.",
-  },
-  {
-    title: "Assemble in New Mexico",
-    text: "Move system assembly to New Mexico, building local jobs and a local supply chain.",
-  },
-  {
-    title: "Make electrolyte here",
-    text: "Produce vanadium electrolyte in New Mexico, the key material in every flow battery.",
-  },
-  {
-    title: "Lease the electrolyte",
-    text: "Offer electrolyte on long-term lease so customers pay less up front for storage.",
-  },
-];
 
 const leaders = team.filter((p) => p.leader);
 ---
@@ -212,17 +172,10 @@ const leaders = team.filter((p) => p.leader);
     </figure>
 
     <div class="wrap">
-      <dl class="specs">
-        {
-          specs.map((s) => (
-            <div class="spec">
-              <dt>{s.name}</dt>
-              <dd class="spec-value">{s.value}</dd>
-              <dd class="spec-text">{s.text}</dd>
-            </div>
-          ))
-        }
-      </dl>
+      <div class="benefits-link">
+        <p>Fire safety, a 20–30 year life, 4–12+ hours of storage and a fully recyclable electrolyte.</p>
+        <a class="btn btn-blue" href={u("/benefits/")}>See the benefits</a>
+      </div>
     </div>
   </section>
 
@@ -243,8 +196,7 @@ const leaders = team.filter((p) => p.leader);
         <h2 id="pilot-h">We've won our first pilot.</h2>
         <p class="lede">
           The New Mexico Energy, Minerals and Natural Resources Department and Kit Carson Electric Cooperative have
-          awarded GridFlow a pilot contract for an 80&nbsp;kWh vanadium flow battery, scheduled for installation in
-          late 2026.
+          awarded GridFlow a pilot contract for 80&nbsp;kWh of vanadium flow battery storage.
         </p>
         <p class="pilot-p">
           GridFlow has also received the New Mexico Advanced Energy Award from the state Economic Development
@@ -279,36 +231,6 @@ const leaders = team.filter((p) => p.leader);
       <button class="motion-toggle marquee-toggle" type="button" aria-pressed="false" data-marquee-toggle hidden>
         Pause logos
       </button>
-    </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section class="roadmap" aria-labelledby="roadmap-h">
-    <video
-      class="section-bg"
-      muted
-      loop
-      playsinline
-      preload="none"
-      poster={u("media/hero-loop-poster.webp")}
-      aria-hidden="true"
-      data-motion
-      data-group="ambient"
-    >
-      <source src={u("media/hero-loop.mp4")} type="video/mp4" />
-    </video>
-    <div class="wrap">
-      <h2 id="roadmap-h">Built in New Mexico, step by step</h2>
-      <ol class="steps">
-        {
-          roadmap.map((s) => (
-            <li>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
-            </li>
-          ))
-        }
-      </ol>
     </div>
   </section>
 
@@ -627,37 +549,21 @@ const leaders = team.filter((p) => p.leader);
     color: var(--blue);
     border-color: var(--blue);
   }
-  .specs {
-    margin: 80px 0 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .benefits-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 64px;
+    padding-top: 28px;
     border-top: 2px solid var(--ink);
   }
-  .spec {
-    padding: 24px 24px 0 0;
+  .benefits-link p {
+    font-size: 1.125rem;
+    font-weight: 560;
   }
-  .spec + .spec {
-    padding-left: 24px;
-    border-left: 1px solid var(--rule);
-  }
-  .spec dt {
-    font-weight: 620;
-  }
-  .spec dd {
-    margin: 0;
-  }
-  .spec-value {
-    margin-top: 6px !important;
-    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
-    font-weight: 760;
-    font-stretch: 106%;
-    line-height: 1.1;
-    color: var(--blue);
-  }
-  .spec-text {
-    margin-top: 12px !important;
-    color: var(--muted);
-    font-size: 0.9375rem;
+  .benefits-link .btn {
+    flex: none;
   }
 
   /* Pilot */
@@ -781,62 +687,6 @@ const leaders = team.filter((p) => p.leader);
     }
   }
 
-  /* Roadmap */
-  .roadmap {
-    position: relative;
-    overflow: hidden;
-    background: var(--deep);
-    color: var(--white);
-    padding-block: var(--section);
-  }
-  .section-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 85% 50%;
-    opacity: 0.13;
-  }
-  .roadmap .wrap {
-    position: relative;
-  }
-  .steps {
-    list-style: none;
-    margin: 56px 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 32px;
-    counter-reset: step;
-  }
-  .steps li {
-    counter-increment: step;
-    border-top: 2px solid #36597f;
-    padding-top: 20px;
-    position: relative;
-  }
-  .steps li:first-child {
-    border-top-color: var(--v5);
-  }
-  .steps li::before {
-    content: counter(step);
-    display: block;
-    font-size: 3rem;
-    font-weight: 760;
-    font-stretch: 120%;
-    line-height: 1;
-    color: #5e7fa3;
-    margin-bottom: 16px;
-  }
-  .steps li:first-child::before {
-    color: var(--v5);
-  }
-  .steps p {
-    margin-top: 10px;
-    color: #b9cbe0;
-  }
-
   /* Team */
   .team {
     padding-block: var(--section);
@@ -930,17 +780,6 @@ const leaders = team.filter((p) => p.leader);
     .pilot-grid {
       grid-template-columns: minmax(0, 1fr);
     }
-    .specs,
-    .steps {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .spec:nth-child(3) {
-      padding-left: 0;
-      border-left: 0;
-    }
-    .spec:nth-child(n + 3) {
-      padding-top: 32px;
-    }
     .people {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -964,15 +803,12 @@ const leaders = team.filter((p) => p.leader);
     }
   }
   @media (max-width: 520px) {
-    .specs,
-    .steps,
     .states {
       grid-template-columns: minmax(0, 1fr);
     }
-    .spec,
-    .spec + .spec {
-      padding: 24px 0 0;
-      border-left: 0;
+    .benefits-link {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

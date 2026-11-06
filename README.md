@@ -11,7 +11,7 @@ npm run dev      # http://localhost:4321
 npm run build    # outputs to dist/
 ```
 
-- Pages live in `src/pages/` (`index.astro`, `contact-us.astro`, `press.astro`). The old WordPress URLs `/contact-us/` and `/press/` are kept.
+- Pages live in `src/pages/`: home, about, benefits, team, careers, press, contact-us, privacy and 404. The old WordPress URLs `/contact-us/` and `/press/` are kept.
 - Shared header and footer: `src/layouts/Base.astro`. Colors and type: `src/styles/global.css`.
 - Press links: `src/data/press.ts`.
 - Images, video and logos: `public/media/` and `public/brand/`.
@@ -23,7 +23,7 @@ The animations are a [Remotion](https://www.remotion.dev) project in `video/`:
 | Composition | Where it's used | File in `public/media/` |
 |---|---|---|
 | `HeroIntro` | Not used on the site right now (welcome intro: "Welcome to GridFlow", then the flow lines meet at the G) | — |
-| `HeroLoop` | Roadmap section background | `hero-loop.mp4` |
+| `HeroLoop` | Not used on the site right now (flowing-lines background loop) | — |
 | `DayCycle` | "One day on a solar grid": 4-hour lithium vs 12-hour vanadium | `day-cycle.mp4` |
 | `FlowBattery` | Technology section: how a flow battery charges and discharges | `flow-battery.mp4` |
 

@@ -1,0 +1,276 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { u } from "../lib/url";
+
+const benefits = [
+  {
+    value: "Water‑based",
+    name: "Negligible fire risk",
+    text: "The electrolyte is mostly water, so there's no thermal runaway and nothing to explode. That makes vanadium flow batteries easier to site near homes, substations and critical facilities.",
+  },
+  {
+    value: "20–30 years",
+    name: "Long service life",
+    text: "Charging and discharging only change the vanadium's charge state, so the chemistry doesn't wear out. Nearly unlimited cycles with no capacity fade means a lower cost for every kilowatt-hour stored over the life of the system.",
+  },
+  {
+    value: "4–12+ hours",
+    name: "Long duration",
+    text: "Energy lives in the tanks and power comes from the cell stack, so each can be sized on its own. Need more hours of storage? Use bigger tanks. That covers the evening peak and the overnight hours a solar-heavy grid needs.",
+  },
+  {
+    value: "100%",
+    name: "Recyclable electrolyte",
+    text: "The vanadium is recovered at end of life and keeps its value, so there's no hazardous battery waste to dispose of.",
+  },
+];
+
+const compare = [
+  { topic: "Fire risk", li: "Cells can go into thermal runaway", v: "Water-based electrolyte that doesn't burn" },
+  { topic: "Practical duration", li: "Gets expensive beyond about 4 hours", v: "4–12+ hours, set by tank size" },
+  { topic: "Capacity over time", li: "Fades a little with every cycle", v: "No capacity fade" },
+  { topic: "Service life", li: "Shorter, limited by cycling", v: "20–30 years" },
+  { topic: "End of life", li: "Hazardous waste, complex recycling", v: "Vanadium is recovered and reused" },
+];
+---
+
+<Base
+  title="Benefits | GridFlow"
+  description="Why vanadium flow batteries: negligible fire risk, a 20–30 year life, 4–12+ hours of storage and a fully recyclable electrolyte."
+  darkHeader
+>
+  <PageHeader
+    title="Why vanadium flow batteries"
+    lede="Long-duration storage that's safe to site, lasts for decades and doesn't leave hazardous waste behind."
+  />
+
+  <section class="benefits">
+    <div class="wrap">
+      <dl class="list">
+        {
+          benefits.map((b) => (
+            <div class="item">
+              <dt>
+                <span class="value">{b.value}</span>
+                <span class="name">{b.name}</span>
+              </dt>
+              <dd>{b.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="compare" aria-labelledby="compare-h">
+    <div class="wrap">
+      <h2 id="compare-h">Compared with lithium-ion</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr">Topic</span></th>
+              <th scope="col">Lithium-ion</th>
+              <th scope="col" class="ours">Vanadium flow</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              compare.map((r) => (
+                <tr>
+                  <th scope="row">{r.topic}</th>
+                  <td data-label="Lithium-ion">{r.li}</td>
+                  <td class="ours" data-label="Vanadium flow">{r.v}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="next">
+    <div class="wrap next-inner">
+      <div>
+        <h2>See how it works</h2>
+        <p class="lede">Watch a flow battery charge from solar and power the grid.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-blue" href={u("/#how")}>How it works</a>
+        <a class="btn btn-outline" href={u("/contact-us/")}>Talk to our team</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .benefits {
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .list {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px 64px;
+  }
+  .item {
+    border-top: 2px solid var(--ink);
+    padding-top: 24px;
+  }
+  .item dt {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .value {
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+    font-weight: 760;
+    font-stretch: 106%;
+    line-height: 1.05;
+    color: var(--blue);
+  }
+  .name {
+    font-size: 1.25rem;
+    font-weight: 680;
+  }
+  .item dd {
+    margin: 12px 0 0;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+
+  .compare {
+    background: var(--white);
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .compare h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .table-wrap {
+    margin-top: 32px;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 16px 20px 16px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  thead th {
+    font-weight: 650;
+    border-bottom: 2px solid var(--ink);
+  }
+  tbody th {
+    font-weight: 620;
+    width: 26%;
+  }
+  td {
+    color: var(--muted);
+  }
+  td.ours {
+    color: var(--ink);
+    font-weight: 560;
+  }
+  thead .ours {
+    color: var(--blue);
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .next {
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .next-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .next h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .next .lede {
+    margin-top: 10px;
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-outline {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .btn-outline:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  /* Phones: each comparison row becomes a stacked card */
+  @media (max-width: 640px) {
+    table {
+      min-width: 0;
+    }
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    table,
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+    }
+    tr {
+      padding-block: 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+    tbody tr:first-child {
+      border-top: 2px solid var(--ink);
+    }
+    tbody th,
+    td {
+      width: auto;
+      padding: 0;
+      border: 0;
+    }
+    tbody th {
+      font-size: 1.0625rem;
+      margin-bottom: 8px;
+    }
+    td + td {
+      margin-top: 6px;
+    }
+    td::before {
+      content: attr(data-label) ": ";
+      font-weight: 650;
+      color: var(--ink);
+    }
+    td.ours::before {
+      color: var(--blue);
+    }
+  }
+  @media (max-width: 760px) {
+    .list {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+  }
+</style>

@@ -66,6 +66,7 @@ const year = new Date().getFullYear();
         <nav aria-label="Main">
           <a href={u("/about/")}>About</a>
           <a href={u("/#how")}>Technology</a>
+          <a href={u("/benefits/")}>Benefits</a>
           <a href={u("/team/")}>Team</a>
           <a href={u("/careers/")}>Careers</a>
           <a class="nav-cta" href={u("/contact-us/")}>Contact</a>
@@ -86,6 +87,7 @@ const year = new Date().getFullYear();
         <div class="foot-links">
           <a href={u("/about/")}>About</a>
           <a href={u("/#how")}>Technology</a>
+          <a href={u("/benefits/")}>Benefits</a>
           <a href={u("/team/")}>Team</a>
           <a href={u("/careers/")}>Careers</a>
           <a href={u("/press/")}>Press</a>
@@ -158,9 +160,10 @@ const year = new Date().getFullYear();
     }
     nav {
       width: 100%;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: flex-start;
       font-size: 0.95rem;
-      gap: 10px;
+      gap: 8px 20px;
     }
     .nav-cta {
       padding: 4px 12px;
