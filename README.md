@@ -11,7 +11,7 @@ npm run dev      # http://localhost:4321
 npm run build    # outputs to dist/
 ```
 
-- Pages live in `src/pages/`: home, about, benefits, team, careers, press, contact-us, privacy and 404. The old WordPress URLs `/contact-us/` and `/press/` are kept.
+- Pages live in `src/pages/`: home, about, benefits, applications, team, careers, press, contact-us, privacy and 404. The old WordPress URLs `/contact-us/` and `/press/` are kept.
 - Shared header and footer: `src/layouts/Base.astro`. Colors and type: `src/styles/global.css`.
 - Press links: `src/data/press.ts`.
 - Images, video and logos: `public/media/` and `public/brand/`.

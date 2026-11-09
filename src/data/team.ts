@@ -47,7 +47,7 @@ export const team: Person[] = [
     role: "Lab Technician",
     photo: "team/rudy-parra.webp",
     linkedin: "https://www.linkedin.com/in/rudy-parra-329a2318a/",
-    bio: "Keeps GridFlow's Albuquerque lab running and leads software development for Pii Energy, GridFlow's plug-in solar and battery line. Spectroscopy research background from the National Solar Observatory, and a board member of NM Tech Talks.",
+    bio: "Keeps GridFlow's Albuquerque lab running and leads the company's software development, from embedded systems to the apps and backend behind them. Spectroscopy research background from the National Solar Observatory, and a board member of NM Tech Talks.",
   },
   {
     name: "Matthew Call",

@@ -12,6 +12,37 @@ interface Props {
 const { title, description, darkHeader = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname.replace(import.meta.env.BASE_URL, "/"), Astro.site);
 const ogImage = new URL("og-image.jpg", Astro.site);
+
+// Search terms (from Fred, Nov 2026). Google ignores the keywords tag, but Bing and others still
+// read it, and the same phrases are worked into page titles, descriptions and copy, which is what counts.
+const keywords = [
+  "vanadium flow batteries",
+  "vanadium redox flow batteries",
+  "long duration energy storage",
+  "commercial vanadium flow batteries",
+  "grid scale energy storage",
+  "utility scale battery storage",
+  "long duration battery storage",
+  "fire safe energy storage",
+  "data center energy storage",
+  "AI data center battery storage",
+  "industrial energy storage",
+  "industrial peak shaving",
+  "solar battery storage systems",
+  "renewable energy storage",
+  "oilfield energy storage",
+  "electric frac battery storage",
+  "remote power energy storage",
+  "microgrid energy storage",
+  "New Mexico energy storage",
+  "Permian Basin energy storage",
+  "containerized battery storage",
+  "non-flammable battery storage",
+  "VRFB",
+  "flow battery manufacturer",
+  "Albuquerque energy storage company",
+].join(", ");
+
 const orgSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -20,8 +51,21 @@ const orgSchema = JSON.stringify({
   url: "https://gridflow.tech",
   logo: "https://gridflow.tech/brand/g-mark.png",
   email: "info@gridflow.tech",
-  description: "GridFlow brings containerized vanadium flow batteries to U.S. utilities, co-ops and businesses.",
+  description:
+    "GridFlow commercializes vanadium redox flow batteries in the United States: fire-safe, long duration energy storage for utilities, data centers, industrial sites, oil and gas, microgrids and critical infrastructure.",
+  foundingDate: "2024",
+  foundingLocation: { "@type": "Place", name: "Albuquerque, New Mexico" },
   address: { "@type": "PostalAddress", addressLocality: "Albuquerque", addressRegion: "NM", addressCountry: "US" },
+  areaServed: "US",
+  knowsAbout: [
+    "vanadium redox flow batteries",
+    "long duration energy storage",
+    "grid scale energy storage",
+    "data center energy storage",
+    "industrial peak shaving",
+    "microgrid energy storage",
+    "oilfield energy storage",
+  ],
   sameAs: ["https://www.linkedin.com/company/gridflow-tech/"],
 });
 const year = new Date().getFullYear();
@@ -34,6 +78,7 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href={u("favicon.png")} />
     <link rel="apple-touch-icon" href={u("apple-touch-icon.png")} />
@@ -67,6 +112,7 @@ const year = new Date().getFullYear();
           <a href={u("/about/")}>About</a>
           <a href={u("/#how")}>Technology</a>
           <a href={u("/benefits/")}>Benefits</a>
+          <a href={u("/applications/")}>Applications</a>
           <a href={u("/team/")}>Team</a>
           <a href={u("/careers/")}>Careers</a>
           <a class="nav-cta" href={u("/contact-us/")}>Contact</a>
@@ -88,6 +134,7 @@ const year = new Date().getFullYear();
           <a href={u("/about/")}>About</a>
           <a href={u("/#how")}>Technology</a>
           <a href={u("/benefits/")}>Benefits</a>
+          <a href={u("/applications/")}>Applications</a>
           <a href={u("/team/")}>Team</a>
           <a href={u("/careers/")}>Careers</a>
           <a href={u("/press/")}>Press</a>

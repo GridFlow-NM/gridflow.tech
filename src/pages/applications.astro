@@ -1,0 +1,298 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { u } from "../lib/url";
+
+// Use cases from Fred's "GridFlow Vanadium Flow Battery Use Cases" slide (Nov 2026).
+// The copy deliberately uses the phrases people search for: long duration energy storage,
+// grid scale / utility scale battery storage, data center energy storage, industrial peak
+// shaving, electric frac battery storage, microgrid energy storage, and so on.
+const uses = [
+  {
+    id: "renewables",
+    name: "Renewable generation and the grid",
+    assets: ["Utility-scale solar and wind", "Electric co-ops", "Substations"],
+    text: "Grid scale energy storage that shifts solar and wind output into the evening peak and overnight hours. Long duration battery storage gives utilities dependable capacity from renewable energy, without the fire risk that is slowing lithium-ion siting.",
+    focus: true,
+  },
+  {
+    id: "data-centers",
+    name: "Data centers",
+    assets: ["AI and hyperscale campuses", "Critical computing"],
+    text: "Data center energy storage that manages demand peaks and adds hours of stored energy alongside UPS and standby generation. For AI data centers, a water-based battery can sit close to the load without adding fire risk to the building.",
+    focus: true,
+  },
+  {
+    id: "industrial",
+    name: "Industrial facilities",
+    assets: ["Steel", "Semiconductor", "Chemical plants"],
+    text: "Industrial energy storage for peak shaving and demand-charge management, with enough duration to carry critical operations through outages and price spikes.",
+    focus: true,
+  },
+  {
+    id: "oil-gas",
+    name: "Oil and gas",
+    assets: ["Electric frac", "Water transfer", "Remote production"],
+    text: "Oilfield energy storage that buffers variable loads and cuts generator runtime and fuel use. Electric frac battery storage and remote production sites in the Permian Basin can run cleaner and quieter with fewer engines on site.",
+    focus: true,
+  },
+  {
+    id: "remote",
+    name: "Remote power and microgrids",
+    assets: ["Mines", "Islands", "Remote communities"],
+    text: "Microgrid energy storage that holds local solar and wind for use after dark, reducing dependence on delivered diesel at mines, islands and remote communities.",
+  },
+  {
+    id: "critical",
+    name: "Critical infrastructure",
+    assets: ["Hospitals", "Water systems", "Telecom", "EV depots"],
+    text: "Fire-safe energy storage for places that cannot go dark. Longer backup for hospitals, water and telecom, and steady supply for concentrated loads like EV fleet depots.",
+  },
+];
+---
+
+<Base
+  title="Applications | GridFlow Vanadium Flow Batteries"
+  description="Where vanadium flow batteries fit: grid scale and utility scale battery storage, data centers, industrial peak shaving, oilfield and electric frac power, microgrids and critical infrastructure."
+  darkHeader
+>
+  <PageHeader
+    title="Where vanadium flow batteries go to work"
+    lede="Long duration energy storage for renewable integration, grid flexibility and resilience, from solar-plus-storage sites to mobile and remote power."
+  />
+
+  <section class="banner">
+    <div class="wrap">
+      <img
+        src={u("media/applications-farm.webp")}
+        alt="Illustration of rows of GridFlow vanadium flow battery containers at a utility-scale solar site."
+        width="1600"
+        height="488"
+        loading="eager"
+      />
+      <p class="banner-note">Illustration of a utility-scale GridFlow site.</p>
+    </div>
+  </section>
+
+  <section class="uses" aria-labelledby="uses-h">
+    <div class="wrap">
+      <h2 id="uses-h">Six places long-duration storage pays off</h2>
+      <p class="lede">
+        Each GridFlow container holds 4 to 12+ hours of fire-safe, commercial vanadium flow battery storage. Tanks set
+        the hours, the cell stack sets the power, so the same system scales from a single site to utility-scale
+        battery storage.
+      </p>
+      <ul class="use-grid">
+        {
+          uses.map((use) => (
+            <li class="use" id={use.id}>
+              <div class="use-head">
+                <h3>{use.name}</h3>
+                {use.focus && <span class="pill">Go-to-market focus</span>}
+              </div>
+              <p class="assets">{use.assets.join(" · ")}</p>
+              <p class="value">{use.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="mobile">
+    <div class="wrap mobile-grid">
+      <figure>
+        <img
+          src={u("media/applications-mobile.webp")}
+          alt="Illustration of a GridFlow vanadium battery container on a flatbed truck on a desert road."
+          width="1600"
+          height="488"
+          loading="lazy"
+        />
+        <figcaption>Illustration of a containerized unit in transit.</figcaption>
+      </figure>
+      <div>
+        <h2>Built to move</h2>
+        <p>
+          Our systems ship in standard containers, so the same vanadium flow battery that anchors a solar farm can be
+          trucked to a frac site, a mine or a community microgrid. Set it down, connect it, and it is ready to store
+          power that day.
+        </p>
+        <p>
+          Based in New Mexico, we're building for the Southwest first: the solar-rich grids, data center growth and
+          Permian Basin operations in our own back yard.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="next">
+    <div class="wrap next-inner">
+      <div>
+        <h2>Have a site in mind?</h2>
+        <p class="lede">Tell us about the load, the hours you need to cover and where it sits. We'll size it with you.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-blue" href={u("/contact-us/")}>Talk to our team</a>
+        <a class="btn btn-outline" href={u("/benefits/")}>Why vanadium</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .banner {
+    position: relative;
+    padding-block: 0 clamp(40px, 6vw, 72px);
+    margin-top: clamp(-64px, -6vw, -32px);
+  }
+  .banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 24px 60px -24px rgba(14, 42, 71, 0.45);
+  }
+  .banner-note {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .uses {
+    padding-block: clamp(24px, 4vw, 48px) clamp(56px, 8vw, 96px);
+  }
+  .uses h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .uses .lede {
+    margin-top: 14px;
+    max-width: 64ch;
+  }
+  .use-grid {
+    list-style: none;
+    margin: 48px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 48px;
+  }
+  .use {
+    border-top: 2px solid var(--ink);
+    padding-top: 20px;
+  }
+  .use-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .use h3 {
+    font-size: 1.3125rem;
+    font-weight: 700;
+    font-stretch: 108%;
+  }
+  .pill {
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--blue);
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+  .assets {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .value {
+    margin-top: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .mobile {
+    background: var(--white);
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+  .mobile img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+  .mobile figcaption {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .mobile h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .mobile p {
+    margin-top: 14px;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  .next {
+    padding-block: clamp(56px, 8vw, 96px);
+  }
+  .next-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .next h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .next .lede {
+    margin-top: 10px;
+    max-width: 48ch;
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-outline {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .btn-outline:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  @media (max-width: 960px) {
+    .use-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 860px) {
+    .mobile-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .use-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .banner img,
+    .mobile img {
+      border-radius: 14px;
+    }
+  }
+</style>

@@ -16,11 +16,21 @@ const states = [
 
 
 const leaders = team.filter((p) => p.leader);
+
+// Short versions of the use cases on /applications/
+const applications = [
+  { id: "renewables", name: "Renewables and the grid", text: "Grid scale storage that shifts solar and wind into the evening peak." },
+  { id: "data-centers", name: "Data centers", text: "Hours of storage for AI and hyperscale campuses, with no added fire risk." },
+  { id: "industrial", name: "Industrial", text: "Peak shaving and backup for steel, semiconductor and chemical plants." },
+  { id: "oil-gas", name: "Oil and gas", text: "Electric frac and remote production with fewer generators running." },
+  { id: "remote", name: "Remote power and microgrids", text: "Local renewables stored for mines, islands and remote communities." },
+  { id: "critical", name: "Critical infrastructure", text: "Longer backup for hospitals, water, telecom and EV depots." },
+];
 ---
 
 <Base
-  title="GridFlow | Vanadium flow batteries for the grid"
-  description="GridFlow brings containerized vanadium flow batteries to U.S. utilities, co-ops and businesses: long-duration storage with negligible fire risk and a 20–30 year life. Based in Albuquerque, NM."
+  title="GridFlow | Vanadium flow batteries for long duration energy storage"
+  description="GridFlow builds commercial vanadium flow batteries in New Mexico: fire-safe, long duration energy storage for utilities, data centers, industry and oil and gas. Grid scale and utility scale battery storage with a 20–30 year life."
   darkHeader
 >
   <!-- Hero -->
@@ -108,8 +118,10 @@ const leaders = team.filter((p) => p.leader);
             hours carries the evening peak through to morning.
           </p>
           <p class="day-nm">
-            New Mexico plans to reach 80% renewable power by 2040, and by our estimate its grid is already about
-            <strong>3,000 MWh</strong> short of the storage its existing solar needs.
+            New Mexico's <a href="https://clean.energy.nm.gov/clean-energy-concierge/utility-scale-generation-pathway/" rel="noopener">Energy Transition Act</a>
+            sets a Renewable Portfolio Standard of 80% renewable electricity by 2040 and 100% carbon-free electricity
+            by 2045. By our estimate, the state's grid is already about <strong>3,000 MWh</strong> short of the storage
+            its existing solar needs.
           </p>
           <button class="motion-toggle" type="button" aria-pressed="false" data-toggle="day" hidden>Pause animation</button>
         </div>
@@ -179,6 +191,34 @@ const leaders = team.filter((p) => p.leader);
     </div>
   </section>
 
+  <!-- Applications -->
+  <section id="applications" class="apps" aria-labelledby="apps-h">
+    <div class="wrap">
+      <div class="apps-head">
+        <div>
+          <h2 id="apps-h">Where long-duration storage goes to work</h2>
+          <p class="lede">
+            Fire-safe vanadium flow battery storage for utilities, data centers, industry, oil and gas, and the places
+            the grid doesn't reach.
+          </p>
+        </div>
+        <a class="btn btn-blue" href={u("/applications/")}>See all applications</a>
+      </div>
+      <ul class="apps-list">
+        {
+          applications.map((a) => (
+            <li>
+              <a href={u(`/applications/#${a.id}`)}>
+                <span class="apps-name">{a.name}</span>
+                <span class="apps-text">{a.text}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
   <!-- Pilot -->
   <section id="pilot" class="pilot" aria-labelledby="pilot-h">
     <div class="wrap pilot-grid">
@@ -193,10 +233,10 @@ const leaders = team.filter((p) => p.leader);
         <figcaption>Illustration of a future grid-scale site.</figcaption>
       </figure>
       <div>
-        <h2 id="pilot-h">We've won our first pilot.</h2>
+        <h2 id="pilot-h">GridFlow is commercializing vanadium flow batteries in the US.</h2>
         <p class="lede">
-          The New Mexico Energy, Minerals and Natural Resources Department and Kit Carson Electric Cooperative have
-          awarded GridFlow a pilot contract for 80&nbsp;kWh of vanadium flow battery storage.
+          Our first pilot contract is in hand: the New Mexico Energy, Minerals and Natural Resources Department and Kit Carson
+          Electric Cooperative have awarded GridFlow a contract for 80&nbsp;kWh of vanadium flow battery storage.
         </p>
         <p class="pilot-p">
           GridFlow has also received the New Mexico Advanced Energy Award from the state Economic Development
@@ -566,8 +606,67 @@ const leaders = team.filter((p) => p.leader);
     flex: none;
   }
 
+  /* Applications */
+  .apps {
+    padding-block: var(--section);
+  }
+  .apps-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px 48px;
+    flex-wrap: wrap;
+  }
+  .apps-head > div {
+    flex: 1 1 480px;
+    max-width: 760px;
+  }
+  .apps-head .lede {
+    margin-top: 16px;
+    max-width: 58ch;
+  }
+  .apps-list {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .apps-list a {
+    display: block;
+    height: 100%;
+    padding: 22px 24px;
+    background: var(--white);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .apps-list a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -20px rgba(14, 42, 71, 0.5);
+  }
+  .apps-list a:hover .apps-name {
+    color: var(--blue);
+  }
+  .apps-name {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 700;
+    font-stretch: 108%;
+  }
+  .apps-text {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
   /* Pilot */
   .pilot {
+    background: var(--white);
     padding-block: var(--section);
   }
   .pilot-grid {
@@ -588,6 +687,9 @@ const leaders = team.filter((p) => p.leader);
     font-size: 0.875rem;
     color: var(--muted);
   }
+  .pilot h2 {
+    font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+  }
   .pilot .lede {
     margin-top: 20px;
   }
@@ -598,7 +700,6 @@ const leaders = team.filter((p) => p.leader);
 
   /* Supporters */
   .supporters {
-    background: var(--white);
     padding-block: clamp(56px, 8vw, 96px);
   }
   .supporters h2 {
@@ -780,6 +881,9 @@ const leaders = team.filter((p) => p.leader);
     .pilot-grid {
       grid-template-columns: minmax(0, 1fr);
     }
+    .apps-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .people {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -803,8 +907,12 @@ const leaders = team.filter((p) => p.leader);
     }
   }
   @media (max-width: 520px) {
-    .states {
+    .states,
+    .apps-list {
       grid-template-columns: minmax(0, 1fr);
+    }
+    .apps-list {
+      gap: 12px;
     }
     .benefits-link {
       flex-direction: column;
